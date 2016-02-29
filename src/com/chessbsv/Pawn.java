@@ -15,8 +15,8 @@ public class Pawn extends Piece {
     ArrayList<Square> possibleMoves = new ArrayList<>();
     ArrayList<Square> validMoves = new ArrayList<>();
 
-    Pawn(int id, piece_type type, piece_color color) {
-        super(id, type, color);
+    Pawn(String xID, piece_type type, piece_color color) {
+        super(xID, type, color);
     }
 
 

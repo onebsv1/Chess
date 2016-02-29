@@ -27,8 +27,8 @@ public class Bishop extends Piece {
     ArrayList<Square> allowedMovesDiagonal4 = new ArrayList<>();
 
 
-    Bishop(int id,piece_type type,piece_color color){
-        super(id,type,color);
+    Bishop(String xID, piece_type type, piece_color color){
+        super(xID,type,color);
     }
 
     @Override
