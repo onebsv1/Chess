@@ -25,6 +25,7 @@ public class Square {
         this.holds = holds;
     }
 
+
     public void setColor(squareColor color) {
         this.color = color;
     }
