@@ -13,6 +13,11 @@ public class Piece {
     piece_type type;
     piece_color color;
 
+    Piece(){
+        this.id = 0;
+        this.type = null;
+        this.color = null;
+    }
 
     Piece(int id,piece_type type,piece_color color){
         this.id    = id;

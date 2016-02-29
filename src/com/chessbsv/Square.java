@@ -8,8 +8,8 @@ public class Square {
 
     public enum squareColor {W,B}
 
-    Piece holds = new Piece(0,null,null);
-    squareColor color = null;
+    Piece holds = new Piece();
+    squareColor color;
     String ID = null;
 
     Square(){
@@ -18,11 +18,18 @@ public class Square {
 
     Square(String ID){
         this.ID = ID;
+        this.color = null;
     }
 
     Square(String ID, Piece holds){
         this.ID = ID;
         this.holds = holds;
+    }
+
+    Square(String ID,Piece p,squareColor col){
+        this.ID = ID;
+        this.color = col;
+        this.holds = p;
     }
 
 
