@@ -6,8 +6,6 @@ import java.util.ArrayList;
  */
 public class Bishop extends Piece {
 
-    Square currentPosition = new Square();
-
     /*
     Diagonals considering the piece to be the center and extending from the
     piece all the way to the ends of the board irrespective of other pieces on the board.
@@ -28,10 +26,6 @@ public class Bishop extends Piece {
     ArrayList<Square> possibleMovesDiagonal3 = new ArrayList<>();
     ArrayList<Square> possibleMovesDiagonal4 = new ArrayList<>();
 
-    //Update the position of the board, if this is a valid move.
-    public void Move(Bishop b,Square position, Board currentBoard){
-
-    }
 
     Bishop(int id,piece_type type,piece_color color){
         super(id,type,color);
@@ -39,7 +33,6 @@ public class Bishop extends Piece {
 
     @Override
     public String toString() {
-        System.out.println("Current Position: "+currentPosition.ID);
         return super.toString();
     }
 

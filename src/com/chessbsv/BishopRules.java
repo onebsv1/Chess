@@ -5,6 +5,7 @@ package com.chessbsv;
  */
 
 public class BishopRules extends Rules {
+
     public void possibleMoves(){
         //public int populate_diagonal();
         // check diagonal entries, store aLL hashed square ids along 4-d diagonal array(1 for each direction)
@@ -16,6 +17,11 @@ public class BishopRules extends Rules {
         if same color found, move to that (square-1)
         else if opp. color move to that square and kill the piece.
          */
+    }
+
+    //Update the position of the board, if this is a valid move.
+    public void Move(Bishop b,Square position, Board currentBoard){
+
     }
 
 }
