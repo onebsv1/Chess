@@ -7,8 +7,10 @@ public class Square {
 
 
     public enum squareColor {W,B}
+    public enum rowLabels {A,B,C,D,E,F,G,H}
+    public static final Integer ROW_START = 1;
+    public static final Integer ROW_END   = 9;
 
-    Piece holds = new Piece();
     squareColor color;
     String ID = null;
 
@@ -21,24 +23,14 @@ public class Square {
         this.color = null;
     }
 
-    Square(String ID, Piece holds){
-        this.ID = ID;
-        this.holds = holds;
-    }
-
-    Square(String ID,Piece p,squareColor col){
+    Square(String ID,squareColor col){
         this.ID = ID;
         this.color = col;
-        this.holds = p;
     }
 
 
     public void setColor(squareColor color) {
         this.color = color;
-    }
-
-    public void setHolds(Piece holds) {
-        this.holds = holds;
     }
 
 

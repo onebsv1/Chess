@@ -5,8 +5,6 @@ package com.chessbsv;
  */
 public class Board extends Row{
 
-    public enum rowLabels {A,B,C,D,E,F,G,H}
-
     public void drawBoard(){
         boolean toggle = false;
         for (int i = 0; i < 8; i++) {

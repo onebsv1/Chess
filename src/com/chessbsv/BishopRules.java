@@ -8,7 +8,7 @@ public class BishopRules extends Rules {
 
     public void possibleMoves(){
         //public int populate_diagonal();
-        // check diagonal entries, store aLL hashed square ids along 4-d diagonal array(1 for each direction)
+        // check diagonal entries, store aLL hashed square ids along 4 1D arrays.
 
     }
     public void allowedMoves() {

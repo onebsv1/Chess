@@ -12,9 +12,6 @@ import java.util.Collections;
 public class Row extends Square {
 
     public ArrayList<Square> squares = new ArrayList<>();
-    public static final Integer ROW_START = 1;
-    public static final Integer ROW_END   = 9;
-
 
     Row(){
     }
