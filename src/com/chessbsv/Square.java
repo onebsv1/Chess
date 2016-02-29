@@ -14,6 +14,8 @@ public class Square {
     squareColor color;
     String ID = null;
 
+    Piece holds = new Piece();
+
     Square(){
         ID = "A1";
     }

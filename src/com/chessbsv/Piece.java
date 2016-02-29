@@ -13,8 +13,6 @@ public class Piece {
     piece_type type;
     piece_color color;
 
-    Square currentPosition = new Square();
-
 
     Piece(){
         this.id = 0;
@@ -34,7 +32,7 @@ public class Piece {
         buf.append("ID: "+id+"\n");
         buf.append("Type:"+type+"\n");
         buf.append("Color:"+color+"\n");
-        buf.append("Current Position: "+currentPosition.ID+"\n");
+        //buf.append("Current Position: "+currentPosition.ID+"\n");
         return buf.toString();
     }
 }
