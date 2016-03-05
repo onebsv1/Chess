@@ -29,7 +29,7 @@ public class Board extends Square{
         squareColor col = toggleColor(toggle);
         for (Integer i = ROW_START; i < ROW_END; i++) {
             String xID = rowLabels.values()[row] + i.toString();
-            //System.out.print(xID);
+
             Square a;
             if(spAssoc.containsKey(xID)){
                 a = new Square(xID,col);
@@ -52,8 +52,8 @@ public class Board extends Square{
         return buf.toString();
     }
 
-    public void populatePieces(String s,Piece p){
-        spAssoc.put(s,p);
+    public void populatePieces(String xID,Piece p){
+        spAssoc.put(xID,p);
     }
 
     public void drawBoard(){

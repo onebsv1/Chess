@@ -12,5 +12,6 @@ public class Main {
         Board board = new Board();
         board.populatePieces(b1.xID,b1);
         board.drawBoard();
+        b1.Move("D1");
     }
 }

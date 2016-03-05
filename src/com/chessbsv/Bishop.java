@@ -16,6 +16,8 @@ public class Bishop extends Piece {
     ArrayList<Square> possibleMovesDiagonal3 = new ArrayList<>();
     ArrayList<Square> possibleMovesDiagonal4 = new ArrayList<>();
 
+
+
     /*
     Diagonals considering blocking pieces, filled in by Bishop_rules,
     Considering the current state of the board.
@@ -29,6 +31,17 @@ public class Bishop extends Piece {
 
     Bishop(String xID, piece_type type, piece_color color){
         super(xID,type,color);
+    }
+
+    public void Move(String newPosition){
+        String currentPos = this.xID;
+        int curPos = this.positionResolver(currentPos);
+        int newPos = this.positionResolver(newPosition);
+
+        BishopRules br = new BishopRules();
+        br.possibleMoves(curPos,newPos,possibleMovesDiagonal1,possibleMovesDiagonal2,possibleMovesDiagonal3,possibleMovesDiagonal4);
+
+
     }
 
     @Override
