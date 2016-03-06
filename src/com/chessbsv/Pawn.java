@@ -19,8 +19,4 @@ public class Pawn extends Piece {
         super(xID, type, color);
     }
 
-
-   // public void dispMove(){
-       // System.out.println("I am in Pawn class");
-    //}
 }
