@@ -1,22 +1,32 @@
 package com.chessbsv;
 
-import java.util.ArrayList;
-
 /**
- * Created by Bhargav Srinivasan on 2/28/16.
+ * Created by Bhargav Srinivasan on 3/5/16.
  */
 public class Pawn extends Piece {
 
-    Square currentPosition = new Square();
-
-    boolean isFirstMove;
-
-    ArrayList<Square> allowedMoves = new ArrayList<>();
-    ArrayList<Square> possibleMoves = new ArrayList<>();
-    ArrayList<Square> validMoves = new ArrayList<>();
-
-    Pawn(String xID, piece_type type, piece_color color) {
-        super(xID, type, color);
+    Pawn(String xID, piece_type type, piece_color color){
+        this.xID = xID;
+        this.type = type;
+        this.color = color;
     }
 
+    public void dispMove(String newPosition){
+
+        System.out.println("This is Pawn:dispMove.");
+        String currentPos = this.xID;
+        int curPos = this.positionResolver(currentPos);
+        int newPos = this.positionResolver(newPosition);
+
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer buf = new StringBuffer();
+        buf.append("ID: "+xID+"\n");
+        buf.append("Type:"+type+"\n");
+        buf.append("Color:"+color+"\n");
+        buf.append("Current Position: "+xID+"\n");
+        return buf.toString();
+    }
 }

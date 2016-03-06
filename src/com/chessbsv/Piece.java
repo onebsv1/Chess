@@ -6,32 +6,18 @@ import java.util.HashMap;
  * Created by bsriniva on 2/21/16.
  */
 
-public class Piece {
-
-    public enum piece_type {BISHOP,ROOK,KING,KNIGHT,QUEEN,PAWN}
-    public enum piece_color{BLACK,WHITE}
-
-    HashMap<String,Integer> alphaNum = new HashMap<>();
-
-
-
+public abstract class Piece {
 
     String xID;
     piece_type type;
     piece_color color;
 
+    public abstract void dispMove(String d1);
 
-    Piece(){
-        this.xID = null;
-        this.type = null;
-        this.color = null;
-    }
+    public enum piece_type {BISHOP,ROOK,KING,KNIGHT,QUEEN,PAWN}
+    public enum piece_color{BLACK,WHITE}
 
-    Piece(String id,piece_type type,piece_color color){
-        this.xID   = id;
-        this.type  = type;
-        this.color = color;
-    }
+    HashMap<String,Integer> alphaNum = new HashMap<>();
 
     public int positionResolver(String pos){
         loadAlphaNum();
@@ -54,13 +40,7 @@ public class Piece {
         alphaNum.put("G",7);
     }
 
+
     @Override
-    public String toString() {
-        StringBuffer buf = new StringBuffer();
-        buf.append("ID: "+xID+"\n");
-        buf.append("Type:"+type+"\n");
-        buf.append("Color:"+color+"\n");
-        buf.append("Current Position: "+xID+"\n");
-        return buf.toString();
-    }
+    public abstract String toString();
 }

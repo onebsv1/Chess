@@ -1,6 +1,8 @@
 package com.chessbsv;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by bsriniva on 2/21/16.
  */
@@ -16,8 +18,6 @@ public class Bishop extends Piece {
     ArrayList<Square> possibleMovesDiagonal3 = new ArrayList<>();
     ArrayList<Square> possibleMovesDiagonal4 = new ArrayList<>();
 
-
-
     /*
     Diagonals considering blocking pieces, filled in by Bishop_rules,
     Considering the current state of the board.
@@ -30,24 +30,27 @@ public class Bishop extends Piece {
 
 
     Bishop(String xID, piece_type type, piece_color color){
-        super(xID,type,color);
+        this.xID = xID;
+        this.type = type;
+        this.color = color;
     }
 
-    public void Move(String newPosition){
+    public void dispMove(String newPosition){
+
+        System.out.println("This is Bishop:dispMove.");
         String currentPos = this.xID;
         int curPos = this.positionResolver(currentPos);
         int newPos = this.positionResolver(newPosition);
-
-        BishopRules br = new BishopRules();
-        br.possibleMoves(curPos,newPos,possibleMovesDiagonal1,possibleMovesDiagonal2,possibleMovesDiagonal3,possibleMovesDiagonal4);
-
-
     }
-
 
     @Override
     public String toString() {
-        return super.toString();
+        StringBuffer buf = new StringBuffer();
+        buf.append("ID: "+xID+"\n");
+        buf.append("Type:"+type+"\n");
+        buf.append("Color:"+color+"\n");
+        buf.append("Current Position: "+xID+"\n");
+        return buf.toString();
     }
 
 

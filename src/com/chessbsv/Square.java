@@ -14,7 +14,17 @@ public class Square {
     squareColor color;
     String ID = null;
 
-    Piece holds = new Piece();
+    Piece holds = new Piece() {
+        @Override
+        public void dispMove(String d1) {
+
+        }
+
+        @Override
+        public String toString() {
+            return null;
+        }
+    };
 
     Square(){
         ID = "A1";

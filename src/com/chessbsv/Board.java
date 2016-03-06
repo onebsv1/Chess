@@ -27,6 +27,7 @@ public class Board extends Square{
 
     public void spawnSquares(boolean toggle, int row){
         squareColor col = toggleColor(toggle);
+
         for (Integer i = ROW_START; i < ROW_END; i++) {
             String xID = rowLabels.values()[row] + i.toString();
 
