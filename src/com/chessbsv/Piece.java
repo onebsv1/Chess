@@ -9,14 +9,9 @@ import java.util.HashMap;
 public abstract class Piece {
 
     String xID;
-    piece_type type;
-    piece_color color;
     String currentPos;
 
     public abstract void dispMove(String d1);
-
-    public enum piece_type {BISHOP,ROOK,KING,KNIGHT,QUEEN,PAWN}
-    public enum piece_color{BLACK,WHITE}
 
     HashMap<String,Integer> alphaNum = new HashMap<>();
 
@@ -25,7 +20,7 @@ public abstract class Piece {
 
         int rowNumber = alphaNum.get(pos.substring(0,1));
         int colNumber = Integer.decode(String.valueOf(pos.charAt(1)));
-        //System.out.println("Row: "+rowNumber+"Col: "+colNumber);
+        System.out.println("Row: "+rowNumber+"Col: "+colNumber);
         int boardIndex = (rowNumber-1)*8 + (colNumber-1);
         return boardIndex;
 

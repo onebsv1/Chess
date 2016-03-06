@@ -29,10 +29,8 @@ public class Bishop extends Piece {
     ArrayList<Square> allowedMovesDiagonal4 = new ArrayList<>();
 
 
-    Bishop(String xID, String currentPos, piece_type type, piece_color color){
+    Bishop(String xID, String currentPos){
         this.xID = xID;
-        this.type = type;
-        this.color = color;
         this.currentPos = currentPos;
     }
 
@@ -44,12 +42,30 @@ public class Bishop extends Piece {
         int newPos = this.positionResolver(newPosition);
     }
 
+
+    public void possibleMoves(int currentPos, int newPosition){
+        //public int populate_diagonal();
+        // check diagonal entries, store aLL hashed square ids along 4 1D arrays.
+        System.out.println("Current Pos: "+currentPos+" "+newPosition);
+
+        //while index !in (starting col && starting row)
+        //pushback currpos-9
+        //end
+
+    }
+
+    public void allowedMoves() {
+        /*
+        find position occupied by pieces in the diagonal array and move there
+        if same color found, move to that (square-1)
+        else if opp. color move to that square and kill the piece.
+         */
+    }
+
     @Override
     public String toString() {
         StringBuffer buf = new StringBuffer();
         buf.append("ID: "+xID+"\n");
-        buf.append("Type:"+type+"\n");
-        buf.append("Color:"+color+"\n");
         buf.append("Current Position: "+xID+"\n");
         return buf.toString();
     }

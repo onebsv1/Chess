@@ -48,7 +48,7 @@ public class Board extends Square{
     public String Draw() {
         StringBuffer buf = new StringBuffer();
         //buf.append("  ----     ----     ----     ----     ----     ----     ----     ----  \n");
-        buf.append(squares.get(0).ID+" |"+squares.get(0).color+squares.get(0).holds.type+"| |"+squares.get(1).color+squares.get(1).holds.type+"| |"+squares.get(2).color+squares.get(2).holds.type+"| |"+squares.get(3).color+squares.get(3).holds.type+"| |"+squares.get(4).color+squares.get(4).holds.type+"| |"+squares.get(5).color+squares.get(5).holds.type+"| |"+squares.get(6).color+squares.get(6).holds.type+"| |"+squares.get(7).color+squares.get(7).holds.type+"| \n");
+        buf.append(squares.get(0).ID+" |"+squares.get(0).color+squares.get(0).holds.xID+"| |"+squares.get(1).color+squares.get(1).holds.xID+"| |"+squares.get(2).color+squares.get(2).holds.xID+"| |"+squares.get(3).color+squares.get(3).holds.xID+"| |"+squares.get(4).color+squares.get(4).holds.xID+"| |"+squares.get(5).color+squares.get(5).holds.xID+"| |"+squares.get(6).color+squares.get(6).holds.xID+"| |"+squares.get(7).color+squares.get(7).holds.xID+"| \n");
         //buf.append("  ----     ----     ----     ----     ----     ----     ----     ----  \n");
         return buf.toString();
     }

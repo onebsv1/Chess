@@ -7,8 +7,8 @@ public class Main {
 	// write your code here
         //System.out.println("Hello");
 
-        Bishop b1 = new Bishop("BW1","C3",Piece.piece_type.BISHOP, Piece.piece_color.WHITE);
-        Pawn pawn1 = new Pawn("PW1","F4",Piece.piece_type.PAWN, Piece.piece_color.WHITE);
+        Bishop b1 = new Bishop("BW1","C3");
+        Pawn pawn1 = new Pawn("PW1","F4");
         System.out.print(b1);
         Board board = new Board();
         board.populatePieces(b1.currentPos,b1);

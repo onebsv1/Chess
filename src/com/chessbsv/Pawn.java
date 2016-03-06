@@ -5,30 +5,23 @@ package com.chessbsv;
  */
 public class Pawn extends Piece {
 
-    Pawn(String xID, String currentPos, piece_type type, piece_color color){
+    Pawn(String xID, String currentPos){
         this.xID = xID;
-        this.type = type;
-        this.color = color;
         this.currentPos = currentPos;
     }
 
     public void dispMove(String newPosition){
-
         System.out.println("This is Pawn:dispMove.");
         String currPos = this.currentPos;
         int cPos = this.positionResolver(currPos);
         int newPos = this.positionResolver(newPosition);
-
-
     }
 
     @Override
     public String toString() {
         StringBuffer buf = new StringBuffer();
         buf.append("ID: "+xID+"\n");
-        buf.append("Type:"+type+"\n");
-        buf.append("Color:"+color+"\n");
-        buf.append("Current Position: "+xID+"\n");
+        buf.append("Current Position: "+currentPos+"\n");
         return buf.toString();
     }
 }
