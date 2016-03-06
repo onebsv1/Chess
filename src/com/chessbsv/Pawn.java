@@ -5,13 +5,19 @@ package com.chessbsv;
  */
 public class Pawn extends Piece {
 
-    Pawn(String xID, String currentPos){
+    Pawn(String xID, String currentPos,piece_color color,piece_type type) throws IllegalArgumentException {
         this.xID = xID;
-        this.currentPos = currentPos;
+        this.color = color;
+        this.type = type;
+        if(this.validPosition(currentPos)){
+            this.currentPos = currentPos;
+        } else {
+            throw new IllegalArgumentException("Invalid Bishop position");
+        }
     }
 
     public void dispMove(String newPosition){
-        System.out.println("This is Pawn:dispMove.");
+        //System.out.println("This is Pawn:dispMove.");
         String currPos = this.currentPos;
         int cPos = this.positionResolver(currPos);
         int newPos = this.positionResolver(newPosition);

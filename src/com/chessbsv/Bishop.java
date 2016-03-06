@@ -54,13 +54,19 @@ public class Bishop extends Piece {
         }
     }
 
-    public void dispMove(String newPosition){
+    public void dispMove(String newPosition) {
 
-        System.out.println("This is Bishop:dispMove.");
+        //System.out.println("This is Bishop:dispMove.");
         String curPos = this.currentPos;
         int cPos = this.positionResolver(curPos);
         int newPos = this.positionResolver(newPosition);
-        possibleMoves(cPos,newPos);
+        boolean moveStatus = possibleMoves(cPos,newPos);
+        if(!moveStatus){
+            System.out.println("Not a vaild position, try again.");
+        } else {
+            System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
+        }
+
     }
 
 
@@ -68,7 +74,7 @@ public class Bishop extends Piece {
         //public int populate_diagonal();
         // check diagonal entries, store aLL hashed square ids along 4 1D arrays.
         boolean validMoves = false;
-        System.out.println("Current Pos: "+currentPos+" "+newPosition);
+        System.out.println("Current Pos, New Pos: "+this.xIDResolver(currentPos)+" , "+this.xIDResolver(newPosition));
 
         loadtopLeft();
         loadtopRight();
@@ -77,12 +83,12 @@ public class Bishop extends Piece {
 
         Integer tempPos = currentPos;
 
-        System.out.println("\nTop Left: ");
+        //System.out.println("\nTop Left: ");
 
         while (!topLeft.contains(currentPos)){
             currentPos = currentPos -9;
             possibleMovesDiagonal1.add(currentPos);
-            System.out.println("Current pos: "+currentPos);
+            //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -90,12 +96,12 @@ public class Bishop extends Piece {
 
         currentPos = tempPos;
 
-        System.out.println("\nTop Right: ");
+        //System.out.println("\nTop Right: ");
 
         while (!topRight.contains(currentPos)){
             currentPos = currentPos -7;
             possibleMovesDiagonal1.add(currentPos);
-            System.out.println("Current pos: "+currentPos);
+            //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -103,12 +109,12 @@ public class Bishop extends Piece {
 
         currentPos = tempPos;
 
-        System.out.println("\nBottom Right: ");
+        //System.out.println("\nBottom Right: ");
 
         while (!bottomRight.contains(currentPos)){
             currentPos = currentPos + 9;
             possibleMovesDiagonal1.add(currentPos);
-            System.out.println("Current pos: "+currentPos);
+            //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -116,12 +122,12 @@ public class Bishop extends Piece {
 
         currentPos = tempPos;
 
-        System.out.println("\nBottom Left: ");
+        //System.out.println("\nBottom Left: ");
 
         while (!bottomLeft.contains(currentPos)){
             currentPos = currentPos + 7;
             possibleMovesDiagonal1.add(currentPos);
-            System.out.println("Current pos: "+currentPos);
+            //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }

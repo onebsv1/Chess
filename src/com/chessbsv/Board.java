@@ -53,8 +53,8 @@ public class Board extends Square{
         return buf.toString();
     }
 
-    public void populatePieces(String currentPos,Piece p){
-        spAssoc.put(currentPos,p);
+    public void populatePieces(Piece p){
+        spAssoc.put(p.currentPos,p);
     }
 
     public void drawBoard(){
