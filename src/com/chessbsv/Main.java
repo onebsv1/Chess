@@ -7,17 +7,19 @@ public class Main {
 	// write your code here
         //System.out.println("Hello");
 
-        Bishop b1 = new Bishop("BW1","C3");
-        Pawn pawn1 = new Pawn("PW1","F4");
-        System.out.print(b1);
-        Board board = new Board();
-        board.populatePieces(b1.currentPos,b1);
-        board.populatePieces(pawn1.currentPos,pawn1);
-        board.drawBoard();
-        Piece px = board.spAssoc.get(b1.currentPos);
-        px.dispMove("D1");
-        Piece px2 = board.spAssoc.get(pawn1.currentPos);
-        px2.dispMove("C1");
+        try {
+            Bishop b1 = new Bishop("BW1", "H8", Piece.piece_color.WHITE, Piece.piece_type.BISHOP);
+            System.out.print(b1);
+            Board board = new Board();
+            board.populatePieces(b1.currentPos,b1);
+            board.drawBoard();
+            Piece px = board.spAssoc.get(b1.currentPos);
+            px.dispMove("A1");
+        } catch (IllegalArgumentException e){
+            System.out.println("Enter a vaild position.");
+            e.printStackTrace();
+            return;
+        }
 
 
 
