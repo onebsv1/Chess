@@ -1,6 +1,8 @@
 package com.chessbsv;
 
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -19,8 +21,17 @@ public class Main {
             board.populatePieces(p2);
             board.populatePieces(p3);
             board.drawBoard();
-            Piece px = board.spAssoc.get(b1.currentPos);
-            px.dispMove("A1");
+
+
+            boolean moveStatus = false;
+            while(!moveStatus) {
+                System.out.println("Enter next position: ");
+                Scanner sc = new Scanner(System.in);
+                String nextPostion = sc.next();
+                Piece px = board.spAssoc.get(b1.currentPos);
+                moveStatus = px.dispMove(nextPostion);
+            }
+
         } catch (IllegalArgumentException e){
             System.out.println("Enter a vaild position.");
             e.printStackTrace();

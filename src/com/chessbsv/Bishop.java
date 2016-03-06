@@ -1,10 +1,6 @@
 package com.chessbsv;
 
-import com.sun.org.apache.xpath.internal.functions.FuncFalse;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -54,7 +50,7 @@ public class Bishop extends Piece {
         }
     }
 
-    public void dispMove(String newPosition) {
+    public boolean dispMove(String newPosition) {
 
         //System.out.println("This is Bishop:dispMove.");
         String curPos = this.currentPos;
@@ -67,6 +63,7 @@ public class Bishop extends Piece {
             System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
         }
 
+        return moveStatus;
     }
 
 

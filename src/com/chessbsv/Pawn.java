@@ -16,11 +16,13 @@ public class Pawn extends Piece {
         }
     }
 
-    public void dispMove(String newPosition){
+    public boolean dispMove(String newPosition){
         //System.out.println("This is Pawn:dispMove.");
         String currPos = this.currentPos;
         int cPos = this.positionResolver(currPos);
         int newPos = this.positionResolver(newPosition);
+
+        return false;
     }
 
     @Override
