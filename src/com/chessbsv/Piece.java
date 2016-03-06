@@ -24,15 +24,15 @@ public abstract class Piece {
 
         loadAlphaNum();
 
-        int rowNumber = alphaNum.get(pos.substring(0,1));
-        int colNumber = Integer.decode(String.valueOf(pos.charAt(1)));
+        Integer rowNumber = alphaNum.get(pos.substring(0,1));
+        Integer colNumber = Integer.decode(String.valueOf(pos.charAt(1)));
         //System.out.println("Row: "+rowNumber+"Col: "+colNumber);
-        int boardIndex = (rowNumber-1)*8 + (colNumber-1);
+        Integer boardIndex = (rowNumber-1)*8 + (colNumber-1);
         return boardIndex;
 
     }
 
-    public String xIDResolver(int pos){
+    public String xIDResolver(Integer pos){
 
         loadNumAlpha();
         Integer colNumber = (pos%8) + 1;
@@ -42,13 +42,14 @@ public abstract class Piece {
         ID.append(numAlpha.get(rowNumber.intValue()));
         ID.append(colNumber.toString());
 
-        System.out.println("Row: "+rowNumber+"Col: "+colNumber+"Pos: "+pos);
+        //System.out.println("Row: "+rowNumber+"Col: "+colNumber+"Pos: "+pos);
+        if(!validPosition(pos)){return null;}
 
         return ID.toString();
     }
 
     public boolean validPosition(String currentPos){
-        int pos = this.positionResolver(currentPos);
+        Integer pos = this.positionResolver(currentPos);
         if(pos<0 || pos>=64){
             return false;
         } else {
@@ -58,7 +59,7 @@ public abstract class Piece {
     }
 
     public boolean validPosition(int currentPos){
-        int pos = currentPos;
+        Integer pos = currentPos;
         if(pos<0 || pos>=64){
             return false;
         } else {

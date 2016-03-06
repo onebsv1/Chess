@@ -8,7 +8,7 @@ public class Main {
         //System.out.println("Hello");
 
         try {
-            Bishop b1 = new Bishop("BW1", "H8", Piece.piece_color.WHITE, Piece.piece_type.BISHOP);
+            Bishop b1 = new Bishop("BW1", "D4", Piece.piece_color.WHITE, Piece.piece_type.BISHOP);
             System.out.print(b1);
             Board board = new Board();
             board.populatePieces(b1.currentPos,b1);
