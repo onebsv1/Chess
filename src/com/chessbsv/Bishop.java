@@ -64,9 +64,10 @@ public class Bishop extends Piece {
     }
 
 
-    public void possibleMoves(Integer currentPos, Integer newPosition){
+    public boolean possibleMoves(Integer currentPos, Integer newPosition){
         //public int populate_diagonal();
         // check diagonal entries, store aLL hashed square ids along 4 1D arrays.
+        boolean validMoves = false;
         System.out.println("Current Pos: "+currentPos+" "+newPosition);
 
         loadtopLeft();
@@ -82,6 +83,9 @@ public class Bishop extends Piece {
             currentPos = currentPos -9;
             possibleMovesDiagonal1.add(currentPos);
             System.out.println("Current pos: "+currentPos);
+            if(newPosition==currentPos){
+                validMoves = true;
+            }
         }
 
         currentPos = tempPos;
@@ -92,6 +96,9 @@ public class Bishop extends Piece {
             currentPos = currentPos -7;
             possibleMovesDiagonal1.add(currentPos);
             System.out.println("Current pos: "+currentPos);
+            if(newPosition==currentPos){
+                validMoves = true;
+            }
         }
 
         currentPos = tempPos;
@@ -102,6 +109,9 @@ public class Bishop extends Piece {
             currentPos = currentPos + 9;
             possibleMovesDiagonal1.add(currentPos);
             System.out.println("Current pos: "+currentPos);
+            if(newPosition==currentPos){
+                validMoves = true;
+            }
         }
 
         currentPos = tempPos;
@@ -112,6 +122,9 @@ public class Bishop extends Piece {
             currentPos = currentPos + 7;
             possibleMovesDiagonal1.add(currentPos);
             System.out.println("Current pos: "+currentPos);
+            if(newPosition==currentPos){
+                validMoves = true;
+            }
         }
 
         currentPos = tempPos;
@@ -119,7 +132,7 @@ public class Bishop extends Piece {
         //while index !in (starting col && starting row)
         //pushback currpos-9
         //end
-
+        return validMoves;
     }
 
     public void allowedMoves() {
