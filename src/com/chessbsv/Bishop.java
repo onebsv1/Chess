@@ -44,9 +44,9 @@ public class Bishop extends Piece {
 
     }
 
-    public void dispMove(){
-        System.out.println("I am in Bishop class");
-    }
+    //public void dispMove(){
+        //System.out.println("I am in Bishop class");
+   // }
 
     @Override
     public String toString() {
