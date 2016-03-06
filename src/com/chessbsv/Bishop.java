@@ -38,6 +38,9 @@ public class Bishop extends Piece {
     */
 
     HashSet<Integer> topLeft = new HashSet<>();
+    HashSet<Integer> topRight = new HashSet<>();
+    HashSet<Integer> bottomLeft = new HashSet<>();
+    HashSet<Integer> bottomRight = new HashSet<>();
 
 
     Bishop(String xID, String currentPos,piece_color color,piece_type type) throws IllegalArgumentException {
@@ -61,16 +64,58 @@ public class Bishop extends Piece {
     }
 
 
-    public void possibleMoves(int currentPos, int newPosition){
+    public void possibleMoves(Integer currentPos, Integer newPosition){
         //public int populate_diagonal();
         // check diagonal entries, store aLL hashed square ids along 4 1D arrays.
         System.out.println("Current Pos: "+currentPos+" "+newPosition);
-        String XIDres = this.xIDResolver(currentPos);
-        System.out.println("Current xID: "+XIDres);
 
-        //while (!topLeft.contains(currentPos)){
+        loadtopLeft();
+        loadtopRight();
+        loadbottomLeft();
+        loadbottomRight();
 
-        //}
+        Integer tempPos = currentPos;
+
+        System.out.println("\nTop Left: ");
+
+        while (!topLeft.contains(currentPos)){
+            currentPos = currentPos -9;
+            possibleMovesDiagonal1.add(currentPos);
+            System.out.println("Current pos: "+currentPos);
+        }
+
+        currentPos = tempPos;
+
+        System.out.println("\nTop Right: ");
+
+        while (!topRight.contains(currentPos)){
+            currentPos = currentPos -7;
+            possibleMovesDiagonal1.add(currentPos);
+            System.out.println("Current pos: "+currentPos);
+        }
+
+        currentPos = tempPos;
+
+        System.out.println("\nBottom Right: ");
+
+        while (!bottomRight.contains(currentPos)){
+            currentPos = currentPos + 9;
+            possibleMovesDiagonal1.add(currentPos);
+            System.out.println("Current pos: "+currentPos);
+        }
+
+        currentPos = tempPos;
+
+        System.out.println("\nBottom Left: ");
+
+        while (!bottomLeft.contains(currentPos)){
+            currentPos = currentPos + 7;
+            possibleMovesDiagonal1.add(currentPos);
+            System.out.println("Current pos: "+currentPos);
+        }
+
+        currentPos = tempPos;
+
         //while index !in (starting col && starting row)
         //pushback currpos-9
         //end
@@ -83,6 +128,55 @@ public class Bishop extends Piece {
         if same color found, move to that (square-1)
         else if opp. color move to that square and kill the piece.
          */
+    }
+
+
+    public void loadtopLeft(){
+
+        for (Integer i = 0; i < 8; i++) {
+            topLeft.add(i);
+        }
+
+        for (Integer i=0; i<64; i+=8) {
+            topLeft.add(i);
+        }
+
+    }
+
+    public void loadtopRight(){
+
+        for (Integer i = 0; i < 8; i++) {
+            topRight.add(i);
+        }
+
+        for (Integer i=7; i<64; i+=8) {
+            topRight.add(i);
+        }
+
+    }
+
+    public void loadbottomLeft(){
+
+        for (Integer i = 56; i < 64; i++) {
+            bottomLeft.add(i);
+        }
+
+        for (Integer i=0; i<64; i+=8) {
+            bottomLeft.add(i);
+        }
+
+    }
+
+    public void loadbottomRight(){
+
+        for (Integer i = 56; i < 64; i++) {
+            bottomRight.add(i);
+        }
+
+        for (Integer i=7; i<64; i+=8) {
+            bottomRight.add(i);
+        }
+
     }
 
     @Override
