@@ -29,17 +29,18 @@ public class Bishop extends Piece {
     ArrayList<Square> allowedMovesDiagonal4 = new ArrayList<>();
 
 
-    Bishop(String xID, piece_type type, piece_color color){
+    Bishop(String xID, String currentPos, piece_type type, piece_color color){
         this.xID = xID;
         this.type = type;
         this.color = color;
+        this.currentPos = currentPos;
     }
 
     public void dispMove(String newPosition){
 
         System.out.println("This is Bishop:dispMove.");
-        String currentPos = this.xID;
-        int curPos = this.positionResolver(currentPos);
+        String curPos = this.currentPos;
+        int cPos = this.positionResolver(curPos);
         int newPos = this.positionResolver(newPosition);
     }
 

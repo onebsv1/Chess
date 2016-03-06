@@ -29,14 +29,14 @@ public class Board extends Square{
         squareColor col = toggleColor(toggle);
 
         for (Integer i = ROW_START; i < ROW_END; i++) {
-            String xID = rowLabels.values()[row] + i.toString();
+            String currentPos = rowLabels.values()[row] + i.toString();
 
             Square a;
-            if(spAssoc.containsKey(xID)){
-                a = new Square(xID,col);
-                a.holds = spAssoc.get(xID);
+            if(spAssoc.containsKey(currentPos)){
+                a = new Square(currentPos,col);
+                a.holds = spAssoc.get(currentPos);
             } else {
-                a = new Square(xID, col);
+                a = new Square(currentPos, col);
             }
 
             squares.add(a);
@@ -53,8 +53,8 @@ public class Board extends Square{
         return buf.toString();
     }
 
-    public void populatePieces(String xID,Piece p){
-        spAssoc.put(xID,p);
+    public void populatePieces(String currentPos,Piece p){
+        spAssoc.put(currentPos,p);
     }
 
     public void drawBoard(){

@@ -11,6 +11,7 @@ public abstract class Piece {
     String xID;
     piece_type type;
     piece_color color;
+    String currentPos;
 
     public abstract void dispMove(String d1);
 

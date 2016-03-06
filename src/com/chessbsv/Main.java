@@ -7,17 +7,17 @@ public class Main {
 	// write your code here
         //System.out.println("Hello");
 
-        Bishop b1 = new Bishop("C3",Piece.piece_type.BISHOP, Piece.piece_color.WHITE);
-        Pawn pawn1 = new Pawn("F4",Piece.piece_type.PAWN, Piece.piece_color.WHITE);
+        Bishop b1 = new Bishop("BW1","C3",Piece.piece_type.BISHOP, Piece.piece_color.WHITE);
+        Pawn pawn1 = new Pawn("PW1","F4",Piece.piece_type.PAWN, Piece.piece_color.WHITE);
         System.out.print(b1);
         Board board = new Board();
-        board.populatePieces(b1.xID,b1);
-        board.populatePieces(pawn1.xID,pawn1);
+        board.populatePieces(b1.currentPos,b1);
+        board.populatePieces(pawn1.currentPos,pawn1);
         board.drawBoard();
-        Piece px = board.spAssoc.get(b1.xID);
+        Piece px = board.spAssoc.get(b1.currentPos);
         px.dispMove("D1");
-        Piece px2 = board.spAssoc.get(pawn1.xID);
-        px2.dispMove("D1");
+        Piece px2 = board.spAssoc.get(pawn1.currentPos);
+        px2.dispMove("C1");
 
 
 
