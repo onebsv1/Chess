@@ -20,4 +20,7 @@ public class Pawn extends Piece {
     }
 
 
+    public void dispMove(){
+        System.out.println("I am in Pawn class");
+    }
 }

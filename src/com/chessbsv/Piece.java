@@ -6,7 +6,7 @@ import java.util.HashMap;
  * Created by bsriniva on 2/21/16.
  */
 
-public class Piece {
+public class Piece extends myMoves {
 
     public enum piece_type {BISHOP,ROOK,KING,KNIGHT,QUEEN,PAWN}
     public enum piece_color{BLACK,WHITE}
