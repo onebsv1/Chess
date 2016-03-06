@@ -18,6 +18,7 @@ public class Pawn extends Piece {
         int curPos = this.positionResolver(currentPos);
         int newPos = this.positionResolver(newPosition);
 
+        
     }
 
     @Override
