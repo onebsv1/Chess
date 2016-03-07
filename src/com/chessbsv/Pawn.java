@@ -16,7 +16,7 @@ public class Pawn extends Piece {
         }
     }
 
-    public boolean dispMove(String newPosition){
+    public boolean dispMove(String newPosition, Board board){
         //System.out.println("This is Pawn:dispMove.");
         String currPos = this.currentPos;
         int cPos = this.positionResolver(currPos);

@@ -50,7 +50,7 @@ public class Bishop extends Piece {
         }
     }
 
-    public boolean dispMove(String newPosition) {
+    public boolean dispMove(String newPosition, Board currentBoard) {
 
         //System.out.println("This is Bishop:dispMove.");
         String curPos = this.currentPos;
@@ -72,7 +72,18 @@ public class Bishop extends Piece {
         } else {
             System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
         }
-        
+
+        if(allowedMoveStatus){
+            currentBoard.removePieces(this);
+            this.currentPos = newPosition;
+            if(!Board.positionXIDAssoc.containsValue(newPosition)) {
+                currentBoard.populatePieces(this);
+            } else {
+                System.out.println("This is a kill");
+                currentBoard.populatePieces(this);
+            }
+        }
+
 
         return allowedMoveStatus;
     }
@@ -163,7 +174,7 @@ public class Bishop extends Piece {
         while((!condition)&&(i<possibleMovesDiagonal1.size())){
             Integer currentPosition = possibleMovesDiagonal1.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.spAssoc.get(exID);
+            Piece tempPiece = Board.squarePieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesDiagonal1.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -185,7 +196,7 @@ public class Bishop extends Piece {
         while((!condition)&&(i<possibleMovesDiagonal2.size())){
             Integer currentPosition = possibleMovesDiagonal2.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.spAssoc.get(exID);
+            Piece tempPiece = Board.squarePieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesDiagonal2.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -207,7 +218,7 @@ public class Bishop extends Piece {
         while((!condition)&&(i<possibleMovesDiagonal3.size())){
             Integer currentPosition = possibleMovesDiagonal3.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.spAssoc.get(exID);
+            Piece tempPiece = Board.squarePieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesDiagonal3.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -229,7 +240,7 @@ public class Bishop extends Piece {
         while((!condition)&&(i<possibleMovesDiagonal4.size())){
             Integer currentPosition = possibleMovesDiagonal4.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.spAssoc.get(exID);
+            Piece tempPiece = Board.squarePieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesDiagonal4.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));

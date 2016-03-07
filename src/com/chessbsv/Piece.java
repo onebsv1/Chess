@@ -15,7 +15,7 @@ public abstract class Piece {
     piece_type type;
     String currentPos;
 
-    public abstract boolean dispMove(String d1);
+    public abstract boolean dispMove(String d1, Board board);
 
     HashMap<String,Integer> alphaNum = new HashMap<>();
     HashMap<Integer,String> numAlpha = new HashMap<>();

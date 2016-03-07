@@ -16,7 +16,7 @@ public class Square {
 
     Piece holds = new Piece() {
         @Override
-        public boolean dispMove(String d1) {
+        public boolean dispMove(String d1, Board board) {
         return false;
         }
 

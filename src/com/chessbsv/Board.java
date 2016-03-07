@@ -10,7 +10,8 @@ public class Board extends Square{
 
     ArrayList<Piece> allPieces = new ArrayList<>();
     ArrayList<Square> squares = new ArrayList<>();
-    public static HashMap<String,Piece> spAssoc= new HashMap<>();
+    public static HashMap<String,Piece> squarePieceAssoc= new HashMap<>();
+    public static HashMap<String,String> positionXIDAssoc = new HashMap<>();
 
     boolean toggle = false;
 
@@ -31,12 +32,9 @@ public class Board extends Square{
         for (Integer i = ROW_START; i < ROW_END; i++) {
             String currentPos = rowLabels.values()[row] + i.toString();
 
-            Square a;
-            if(spAssoc.containsKey(currentPos)){
-                a = new Square(currentPos,col);
-                a.holds = spAssoc.get(currentPos);
-            } else {
-                a = new Square(currentPos, col);
+            Square a = new Square(currentPos,col);
+            if(squarePieceAssoc.containsKey(currentPos)){
+                a.holds = squarePieceAssoc.get(currentPos);
             }
 
             squares.add(a);
@@ -54,10 +52,17 @@ public class Board extends Square{
     }
 
     public void populatePieces(Piece p){
-        spAssoc.put(p.currentPos,p);
+        squarePieceAssoc.put(p.currentPos,p);
+        positionXIDAssoc.put(p.currentPos,p.xID);
+    }
+
+    public void removePieces(Piece p){
+        squarePieceAssoc.remove(p.currentPos,p);
+        positionXIDAssoc.remove(p.currentPos,p.xID);
     }
 
     public void drawBoard(){
+
         for (int i = 0; i < 8; i++) {
             spawnSquares(toggle,i);
             System.out.print(Draw());
