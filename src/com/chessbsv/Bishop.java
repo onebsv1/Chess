@@ -72,6 +72,7 @@ public class Bishop extends Piece {
         } else {
             System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
         }
+        
 
         return allowedMoveStatus;
     }
