@@ -54,15 +54,15 @@ public class Bishop extends Piece {
 
         //System.out.println("This is Bishop:dispMove.");
         String curPos = this.currentPos;
-        int cPos = this.positionResolver(curPos);
-        int newPos = this.positionResolver(newPosition);
+        Integer cPos = this.positionResolver(curPos);
+        Integer newPos = this.positionResolver(newPosition);
         boolean moveStatus = possibleMoves(cPos,newPos);
         if(!moveStatus){
             System.out.println("Not a vaild position, try again.");
         } else {
             System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
         }
-
+        allowedMoves(newPos);
         return moveStatus;
     }
 
@@ -97,7 +97,7 @@ public class Bishop extends Piece {
 
         while (!topRight.contains(currentPos)){
             currentPos = currentPos -7;
-            possibleMovesDiagonal1.add(currentPos);
+            possibleMovesDiagonal2.add(currentPos);
             //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
@@ -110,7 +110,7 @@ public class Bishop extends Piece {
 
         while (!bottomRight.contains(currentPos)){
             currentPos = currentPos + 9;
-            possibleMovesDiagonal1.add(currentPos);
+            possibleMovesDiagonal3.add(currentPos);
             //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
@@ -123,7 +123,7 @@ public class Bishop extends Piece {
 
         while (!bottomLeft.contains(currentPos)){
             currentPos = currentPos + 7;
-            possibleMovesDiagonal1.add(currentPos);
+            possibleMovesDiagonal4.add(currentPos);
             //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
@@ -138,7 +138,75 @@ public class Bishop extends Piece {
         return validMoves;
     }
 
-    public void allowedMoves() {
+    public void allowedMoves(Integer newPosition) {
+        int i=0;
+        boolean cond1 = false;
+        while(!cond1 && i<possibleMovesDiagonal4.size()) {
+            Integer currentPos = possibleMovesDiagonal4.get(i);
+            String allowedPos = xIDResolver(currentPos);
+            Piece p_temp = Board.spAssoc.get(allowedPos);
+            if (p_temp == null) {
+                allowedMovesDiagonal4.add(currentPos);
+                System.out.println("Current pos: "+currentPos);
+            } else if (p_temp.color != this.color) {
+                allowedMovesDiagonal4.add(currentPos);
+                System.out.println("Current pos: "+currentPos);
+            } else if (p_temp.color == this.color) {
+                cond1 = true;
+            }
+            i+=1;
+        }
+        int j=0;
+        boolean cond2 = false;
+        while(!cond2 && i<possibleMovesDiagonal3.size()) {
+            Integer currentPos = possibleMovesDiagonal3.get(j);
+            String allowedPos = xIDResolver(currentPos);
+            Piece p_temp = Board.spAssoc.get(allowedPos);
+            if (p_temp == null) {
+                allowedMovesDiagonal3.add(currentPos);
+                System.out.println("Current pos: "+currentPos);
+            } else if (p_temp.color != this.color) {
+                allowedMovesDiagonal3.add(currentPos);
+                System.out.println("Current pos: "+currentPos);
+            } else if (p_temp.color == this.color) {
+                cond2 = true;
+            }
+            j+=1;
+        }
+        int k=0;
+        boolean cond3 = false;
+        while(!cond3 && i<possibleMovesDiagonal2.size()) {
+            Integer currentPos = possibleMovesDiagonal2.get(k);
+            String allowedPos = xIDResolver(currentPos);
+            Piece p_temp = Board.spAssoc.get(allowedPos);
+            if (p_temp == null) {
+                allowedMovesDiagonal2.add(currentPos);
+                System.out.println("Current pos: "+currentPos);
+            } else if (p_temp.color != this.color) {
+                allowedMovesDiagonal2.add(currentPos);
+                System.out.println("Current pos: "+currentPos);
+            } else if (p_temp.color == this.color) {
+                cond3 = true;
+            }
+            k+=1;
+        }
+        int l=0;
+        boolean cond4 = false;
+        while(!cond4 && i<possibleMovesDiagonal1.size()) {
+            Integer currentPos = possibleMovesDiagonal1.get(l);
+            String allowedPos = xIDResolver(currentPos);
+            Piece p_temp = Board.spAssoc.get(allowedPos);
+            if (p_temp == null) {
+                allowedMovesDiagonal1.add(currentPos);
+                System.out.println("Current pos: "+currentPos);
+            } else if (p_temp.color != this.color) {
+                allowedMovesDiagonal1.add(currentPos);
+                System.out.println("Current pos: "+currentPos);
+            } else if (p_temp.color == this.color) {
+                cond4 = true;
+            }
+            l += 1;
+        }
         /*
         find position occupied by pieces in the diagonal array and move there
         if same color found, move to that (square-1)

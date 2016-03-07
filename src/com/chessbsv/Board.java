@@ -10,7 +10,7 @@ public class Board extends Square{
 
     ArrayList<Piece> allPieces = new ArrayList<>();
     ArrayList<Square> squares = new ArrayList<>();
-    HashMap<String,Piece> spAssoc= new HashMap<>();
+    public static HashMap<String,Piece> spAssoc= new HashMap<>();
 
     boolean toggle = false;
 

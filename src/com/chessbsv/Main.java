@@ -28,7 +28,7 @@ public class Main {
                 System.out.println("Enter next position: ");
                 Scanner sc = new Scanner(System.in);
                 String nextPostion = sc.next();
-                Piece px = board.spAssoc.get(b1.currentPos);
+                Piece px = Board.spAssoc.get(b1.currentPos);
                 moveStatus = px.dispMove(nextPostion);
             }
 
