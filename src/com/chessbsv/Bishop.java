@@ -145,6 +145,7 @@ public class Bishop extends Piece {
         //while index !in (starting col && starting row)
         //pushback currpos-9
         //end
+
         return validMoves;
     }
 
@@ -267,6 +268,16 @@ public class Bishop extends Piece {
                 allowedMoveStatus = true;
             }
         }
+
+        possibleMovesDiagonal1.clear();
+        possibleMovesDiagonal2.clear();
+        possibleMovesDiagonal3.clear();
+        possibleMovesDiagonal4.clear();
+
+        allowedMovesDiagonal1.clear();
+        allowedMovesDiagonal2.clear();
+        allowedMovesDiagonal3.clear();
+        allowedMovesDiagonal4.clear();
 
         return allowedMoveStatus;
 
