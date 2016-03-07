@@ -22,7 +22,6 @@ public class Main {
             board.populatePieces(p3);
             board.drawBoard();
 
-
             boolean moveStatus = false;
             while(!moveStatus) {
                 System.out.println("Enter next position: ");
