@@ -5,6 +5,9 @@ package com.chessbsv;
  */
 public class Pawn extends Piece {
 
+    //Will stop resurrecting piece after the first time.
+    boolean leaveMeAlone = false;
+
     Pawn(String xID, String currentPos,piece_color color,piece_type type) throws IllegalArgumentException {
         this.xID = xID;
         this.color = color;
@@ -29,6 +32,8 @@ public class Pawn extends Piece {
     public String toString() {
         StringBuffer buf = new StringBuffer();
         buf.append("ID: "+xID+"\n");
+        buf.append("Piece type: "+type+"\n");
+        buf.append("Piece color: "+color+"\n");
         buf.append("Current Position: "+currentPos+"\n");
         return buf.toString();
     }

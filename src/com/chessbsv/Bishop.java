@@ -76,10 +76,11 @@ public class Bishop extends Piece {
         if(allowedMoveStatus){
             currentBoard.removePieces(this);
             this.currentPos = newPosition;
-            if(!Board.positionXIDAssoc.containsKey(newPosition)) {
+            if(!Board.xIDPositionAssoc.containsValue(newPosition)) {
                 currentBoard.populatePieces(this);
             } else {
-                System.out.println("This is a kill");
+                killFunction(newPosition);
+                currentBoard.removePieces(Board.positionPieceAssoc.get(newPosition));
                 currentBoard.populatePieces(this);
             }
         }
@@ -174,7 +175,7 @@ public class Bishop extends Piece {
         while((!condition)&&(i<possibleMovesDiagonal1.size())){
             Integer currentPosition = possibleMovesDiagonal1.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.squarePieceAssoc.get(exID);
+            Piece tempPiece = Board.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesDiagonal1.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -196,7 +197,7 @@ public class Bishop extends Piece {
         while((!condition)&&(i<possibleMovesDiagonal2.size())){
             Integer currentPosition = possibleMovesDiagonal2.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.squarePieceAssoc.get(exID);
+            Piece tempPiece = Board.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesDiagonal2.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -218,7 +219,7 @@ public class Bishop extends Piece {
         while((!condition)&&(i<possibleMovesDiagonal3.size())){
             Integer currentPosition = possibleMovesDiagonal3.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.squarePieceAssoc.get(exID);
+            Piece tempPiece = Board.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesDiagonal3.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -240,7 +241,7 @@ public class Bishop extends Piece {
         while((!condition)&&(i<possibleMovesDiagonal4.size())){
             Integer currentPosition = possibleMovesDiagonal4.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.squarePieceAssoc.get(exID);
+            Piece tempPiece = Board.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesDiagonal4.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -292,6 +293,22 @@ public class Bishop extends Piece {
         allowedMovesDiagonal4.clear();
 
         return allowedMoveStatus;
+
+    }
+
+    public void killFunction(String newPosition) throws IllegalArgumentException {
+        Piece killedPiece  = Board.positionPieceAssoc.get(newPosition);
+        if(killedPiece.color == piece_color.BLACK){
+            System.out.println("This is a kill");
+            killedPiece.currentPos = "DEAD";
+            Board.deadBlackPieces.add(killedPiece);
+        } else if (killedPiece.color == piece_color.WHITE) {
+            killedPiece.currentPos = "DEAD";
+            Board.deadWhitePieces.add(killedPiece);
+        } else {
+            throw new IllegalArgumentException("Unknown dead piece!");
+        }
+
 
     }
 
