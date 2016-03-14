@@ -7,6 +7,7 @@ import java.util.HashSet;
  * Created by OM on 3/13/2016.
  */
 public class Knight extends Piece{
+
     ArrayList<Integer> possibleMoves = new ArrayList<>();
 
     /*
@@ -15,9 +16,7 @@ public class Knight extends Piece{
     */
 
     ArrayList<Integer> allowedMoves= new ArrayList<>();
-
-
-
+    
 
 
     Knight(String xID, String currentPos, Piece.piece_color color, Piece.piece_type type) throws IllegalArgumentException {
@@ -45,7 +44,7 @@ public class Knight extends Piece{
             System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
         }
 
-        boolean allowedMoveStatus = allowedMoves(newPos);
+        boolean allowedMoveStatus = allowedMoves(newPos, currentBoard);
 
         if(!allowedMoveStatus){
             System.out.println("Not an allowed position, try again.");
@@ -81,9 +80,9 @@ public class Knight extends Piece{
         //System.out.println("\nTop Left: ");
 
         currentPos = currentPos -6;
-        if (validPosition(currentPos)==true) {
+        if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            //System.out.println("Current pos: "+currentPos);
+            System.out.println("Current pos: "+currentPos);
             if (newPosition == currentPos) {
                 validMoves = true;
             }
@@ -94,9 +93,9 @@ public class Knight extends Piece{
         //System.out.println("\nTop Right: ");
 
         currentPos = currentPos - 10;
-        if (validPosition(currentPos)==true) {
+        if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            //System.out.println("Current pos: "+currentPos);
+            System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -107,9 +106,9 @@ public class Knight extends Piece{
         //System.out.println("\nBottom Right: ");
 
         currentPos = currentPos -15;
-        if (validPosition(currentPos)==true) {
+        if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            //System.out.println("Current pos: "+currentPos);
+            System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -121,9 +120,9 @@ public class Knight extends Piece{
 
 
         currentPos = currentPos -17;
-        if (validPosition(currentPos)==true) {
+        if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            //System.out.println("Current pos: "+currentPos);
+            System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -131,9 +130,9 @@ public class Knight extends Piece{
         currentPos = tempPos;
 
         currentPos = currentPos +6;
-        if (validPosition(currentPos)==true) {
+        if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            //System.out.println("Current pos: "+currentPos);
+            System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -141,9 +140,9 @@ public class Knight extends Piece{
         currentPos = tempPos;
 
         currentPos = currentPos +10;
-        if (validPosition(currentPos)==true) {
+        if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            //System.out.println("Current pos: "+currentPos);
+            System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -151,9 +150,9 @@ public class Knight extends Piece{
         currentPos = tempPos;
 
         currentPos = currentPos +15;
-        if (validPosition(currentPos)==true) {
+        if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            //System.out.println("Current pos: "+currentPos);
+            System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -161,23 +160,20 @@ public class Knight extends Piece{
         currentPos = tempPos;
 
         currentPos = currentPos +17;
-        if (validPosition(currentPos)==true) {
+        if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            //System.out.println("Current pos: "+currentPos);
+            System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
         }
         currentPos = tempPos;
 
-        //while index !in (starting col && starting row)
-        //pushback currpos-9
-        //end
 
         return validMoves;
     }
 
-    public boolean allowedMoves(Integer newPosition) {
+    public boolean allowedMoves(Integer newPosition, Board currentBoard) {
         /*
         find position occupied by pieces in the diagonal array and move there
         if same color found, move to that (square-1)
@@ -190,16 +186,15 @@ public class Knight extends Piece{
         while((!condition)&&(i<possibleMoves.size())){
             Integer currentPosition = possibleMoves.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.positionPieceAssoc.get(exID);
+            //System.out.println(exID);
+            Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMoves.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMoves.add(currentPosition);
-                condition = true;
                 System.out.println("Opp: "+this.xIDResolver(currentPosition));
             } else if (tempPiece.color == this.color){
-                condition = true;
                 System.out.println("Same: "+this.xIDResolver(currentPosition));
             }
             i=i+1;
@@ -229,6 +224,7 @@ public class Knight extends Piece{
             killedPiece.currentPos = "DEAD";
             currentBoard.deadBlackPieces.add(killedPiece);
         } else if (killedPiece.color == Piece.piece_color.WHITE) {
+            System.out.println("This is a kill");
             killedPiece.currentPos = "DEAD";
             currentBoard.deadWhitePieces.add(killedPiece);
         } else {
