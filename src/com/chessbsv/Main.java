@@ -43,12 +43,14 @@ public class Main {
 
         Bishop b1 = new Bishop("BW1", "D4", Piece.piece_color.WHITE, Piece.piece_type.BISHOP);
         Rook r1 = new Rook("RW1", "H1", Piece.piece_color.WHITE, Piece.piece_type.ROOK);
+        Knight k1 = new Knight("KB1", "H5", Piece.piece_color.BLACK, Piece.piece_type.KNIGHT);
         Pawn p1 = new Pawn("PW1", "F6", Piece.piece_color.WHITE, Piece.piece_type.PAWN);
         Pawn p2 = new Pawn("PB1", "A2", Piece.piece_color.BLACK, Piece.piece_type.PAWN);
         Pawn p3 = new Pawn("PB2", "G1", Piece.piece_color.BLACK, Piece.piece_type.PAWN);
 
         board.populatePieces(b1);
         board.populatePieces(r1);
+        board.populatePieces(k1);
         board.populatePieces(p1);
         board.populatePieces(p2);
         board.populatePieces(p3);
