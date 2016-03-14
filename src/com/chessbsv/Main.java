@@ -33,19 +33,27 @@ public class Main {
 
             board.drawBoard();
 
-            boolean moveStatus = false;
-            while(!moveStatus) {
-                Scanner sc = new Scanner(System.in);
-                System.out.println("Enter Piece: ");
-                String nextPiece = sc.next();
-                System.out.println("Enter next position: ");
-                String nextPostion = sc.next();
-                Piece px = board.positionPieceAssoc.get(board.xIDPositionAssoc.get(nextPiece));
-                moveStatus = px.dispMove(nextPostion, board);
+            for (int i = 0; i < 5; i++) {
+
+                boolean moveStatus = false;
+                board.resurrectPiece();
+
+
+                while(!moveStatus) {
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("Enter Piece: ");
+                    String nextPiece = sc.next();
+                    System.out.println("Enter next position: ");
+                    String nextPostion = sc.next();
+                    Piece px = board.positionPieceAssoc.get(board.xIDPositionAssoc.get(nextPiece));
+                    moveStatus = px.dispMove(nextPostion, board);
+                }
+
+
+                board.drawBoard();
+
             }
 
-            board.resurrectPiece();
-            board.drawBoard();
 
         } catch (IllegalArgumentException e){
             System.out.println("Enter a vaild position.");
