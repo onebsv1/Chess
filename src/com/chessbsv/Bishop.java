@@ -76,7 +76,7 @@ public class Bishop extends Piece {
         if(allowedMoveStatus){
             currentBoard.removePieces(this);
             this.currentPos = newPosition;
-            if(!Board.xIDPositionAssoc.containsValue(newPosition)) {
+            if(!currentBoard.xIDPositionAssoc.containsValue(newPosition)) {
                 currentBoard.populatePieces(this);
             } else {
                 killFunction(newPosition);

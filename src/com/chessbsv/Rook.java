@@ -63,9 +63,10 @@ public class Rook extends Piece {
         if(allowedMoveStatus){
             currentBoard.removePieces(this);
             this.currentPos = newPosition;
-            if(!Board.xIDPositionAssoc.containsKey(newPosition)) {
+            if(!currentBoard.xIDPositionAssoc.containsValue(newPosition)) {
                 currentBoard.populatePieces(this);
             } else {
+                System.out.println("This is a kill");
                 killFunction(newPosition);
                 currentBoard.removePieces(Board.positionPieceAssoc.get(newPosition));
                 currentBoard.populatePieces(this);
