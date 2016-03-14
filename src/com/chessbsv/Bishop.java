@@ -79,8 +79,7 @@ public class Bishop extends Piece {
             if(!currentBoard.xIDPositionAssoc.containsValue(newPosition)) {
                 currentBoard.populatePieces(this);
             } else {
-                killFunction(newPosition);
-                currentBoard.removePieces(Board.positionPieceAssoc.get(newPosition));
+                killFunction(newPosition,currentBoard);
                 currentBoard.populatePieces(this);
             }
         }
@@ -296,15 +295,16 @@ public class Bishop extends Piece {
 
     }
 
-    public void killFunction(String newPosition) throws IllegalArgumentException {
+    public void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException {
         Piece killedPiece  = Board.positionPieceAssoc.get(newPosition);
+        currentBoard.removePieces(currentBoard.positionPieceAssoc.get(newPosition));
         if(killedPiece.color == piece_color.BLACK){
             System.out.println("This is a kill");
             killedPiece.currentPos = "DEAD";
-            Board.deadBlackPieces.add(killedPiece);
+            currentBoard.deadBlackPieces.add(killedPiece);
         } else if (killedPiece.color == piece_color.WHITE) {
             killedPiece.currentPos = "DEAD";
-            Board.deadWhitePieces.add(killedPiece);
+            currentBoard.deadWhitePieces.add(killedPiece);
         } else {
             throw new IllegalArgumentException("Unknown dead piece!");
         }
