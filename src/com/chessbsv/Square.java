@@ -22,7 +22,12 @@ public class Square {
 
         @Override
         public String toString() {
-            return null;
+            String buf = "";
+            buf = buf.concat("ID: "+xID+"\n");
+            buf = buf.concat("Piece type: "+type+"\n");
+            buf = buf.concat("Piece color: "+color+"\n");
+            buf = buf.concat("Current Position: "+currentPos+"\n");
+            return buf;
         }
     };
 

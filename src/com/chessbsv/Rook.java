@@ -44,20 +44,20 @@ public class Rook extends Piece {
         Integer cPos = this.positionResolver(curPos);
         Integer newPos = this.positionResolver(newPosition);
         boolean moveStatus = possibleMoves(cPos,newPos);
-        if(!moveStatus){
+        if (moveStatus) {
+            System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
+        } else {
             System.out.println("Not a vaild position, try again.");
             return moveStatus;
-        } else {
-            System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
         }
 
-        boolean allowedMoveStatus = allowedMoves(newPos);
+        boolean allowedMoveStatus = allowedMoves(newPos,currentBoard);
 
-        if(!allowedMoveStatus){
+        if (allowedMoveStatus) {
+            System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
+        } else {
             System.out.println("Not an allowed position, try again.");
             return allowedMoveStatus;
-        } else {
-            System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
         }
 
         if(allowedMoveStatus){
@@ -140,7 +140,7 @@ public class Rook extends Piece {
 
         return validMoves;
     }
-    public boolean allowedMoves(Integer newPosition) {
+    public boolean allowedMoves(Integer newPosition, Board currentBoard) {
         /*
         find position occupied by pieces in the diagonal array and move there
         if same color found, move to that (square-1)
@@ -153,7 +153,7 @@ public class Rook extends Piece {
         while((!condition)&&(i<possibleMovesLeft.size())){
             Integer currentPosition = possibleMovesLeft.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.positionPieceAssoc.get(exID);
+            Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesLeft.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -175,7 +175,7 @@ public class Rook extends Piece {
         while((!condition)&&(i<possibleMovesTop.size())){
             Integer currentPosition = possibleMovesTop.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.positionPieceAssoc.get(exID);
+            Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesTop.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -197,7 +197,7 @@ public class Rook extends Piece {
         while((!condition)&&(i<possibleMovesRight.size())){
             Integer currentPosition = possibleMovesRight.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.positionPieceAssoc.get(exID);
+            Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesRight.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -219,7 +219,7 @@ public class Rook extends Piece {
         while((!condition)&&(i<possibleMovesBottom.size())){
             Integer currentPosition = possibleMovesBottom.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.positionPieceAssoc.get(exID);
+            Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesBottom.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -276,10 +276,9 @@ public class Rook extends Piece {
 
 
     public void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException {
-        Piece killedPiece  = Board.positionPieceAssoc.get(newPosition);
+        Piece killedPiece  = currentBoard.positionPieceAssoc.get(newPosition);
         currentBoard.removePieces(currentBoard.positionPieceAssoc.get(newPosition));
         if(killedPiece.color == piece_color.BLACK){
-            System.out.println("This is a kill");
             killedPiece.currentPos = "DEAD";
             currentBoard.deadBlackPieces.add(killedPiece);
         } else if (killedPiece.color == piece_color.WHITE) {
@@ -319,12 +318,12 @@ public class Rook extends Piece {
 
     @Override
     public String toString() {
-        StringBuffer buf = new StringBuffer();
-        buf.append("ID: "+xID+"\n");
-        buf.append("Piece type: "+type+"\n");
-        buf.append("Piece color: "+color+"\n");
-        buf.append("Current Position: "+currentPos+"\n");
-        return buf.toString();
+        String buf = "";
+        buf = buf.concat("ID: "+xID+"\n");
+        buf = buf.concat("Piece type: "+type+"\n");
+        buf = buf.concat("Piece color: "+color+"\n");
+        buf = buf.concat("Current Position: "+currentPos+"\n");
+        return buf;
     }
 
 

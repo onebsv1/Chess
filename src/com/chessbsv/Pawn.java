@@ -30,11 +30,11 @@ public class Pawn extends Piece {
 
     @Override
     public String toString() {
-        StringBuffer buf = new StringBuffer();
-        buf.append("ID: "+xID+"\n");
-        buf.append("Piece type: "+type+"\n");
-        buf.append("Piece color: "+color+"\n");
-        buf.append("Current Position: "+currentPos+"\n");
-        return buf.toString();
+        String buf = "";
+        buf = buf.concat("ID: "+xID+"\n");
+        buf = buf.concat("Piece type: "+type+"\n");
+        buf = buf.concat("Piece color: "+color+"\n");
+        buf = buf.concat("Current Position: "+currentPos+"\n");
+        return buf;
     }
 }

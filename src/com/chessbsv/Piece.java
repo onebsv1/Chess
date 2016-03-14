@@ -8,9 +8,12 @@ import java.util.HashMap;
 
 public abstract class Piece {
 
-    String xID;
+
     public enum piece_color{BLACK,WHITE}
     public enum piece_type{BISHOP,KING,KNIGHT,PAWN,ROOK,QUEEN}
+
+    //These are the basic properties of each piece.
+    String xID;
     piece_color color;
     piece_type type;
     String currentPos;
@@ -22,17 +25,22 @@ public abstract class Piece {
 
     public int positionResolver(String pos){
 
+        //Takes in position in the form of a string,
+        //Returns (0-64) numerical position.
+
         loadAlphaNum();
 
         Integer rowNumber = alphaNum.get(pos.substring(0,1));
         Integer colNumber = Integer.decode(String.valueOf(pos.charAt(1)));
-        //System.out.println("Row: "+rowNumber+"Col: "+colNumber);
         Integer boardIndex = (rowNumber-1)*8 + (colNumber-1);
         return boardIndex;
 
     }
 
     public String xIDResolver(Integer pos){
+
+        //Takes in position in (0-64) format.
+        //Returns position in String format.
 
         loadNumAlpha();
         Integer colNumber = (pos%8) + 1;
@@ -42,30 +50,32 @@ public abstract class Piece {
         ID.append(numAlpha.get(rowNumber.intValue()));
         ID.append(colNumber.toString());
 
-        //System.out.println("Row: "+rowNumber+"Col: "+colNumber+"Pos: "+pos);
         if(!validPosition(pos)){return null;}
 
         return ID.toString();
     }
 
     public boolean validPosition(String currentPos){
+
+        //Checks if the given string position is within the board.
+
         Integer pos = this.positionResolver(currentPos);
         if(pos<0 || pos>=64){
             return false;
         } else {
             return true;
         }
-
     }
 
-    public boolean validPosition(int currentPos){
-        Integer pos = currentPos;
-        if(pos<0 || pos>=64){
+    public boolean validPosition(Integer currentPos){
+
+        //Checks if the given Integer position is within the board.
+
+        if(currentPos<0 || currentPos>=64){
             return false;
         } else {
             return true;
         }
-
     }
 
     public void loadAlphaNum(){

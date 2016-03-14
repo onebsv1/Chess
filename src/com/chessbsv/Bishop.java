@@ -57,20 +57,20 @@ public class Bishop extends Piece {
         Integer cPos = this.positionResolver(curPos);
         Integer newPos = this.positionResolver(newPosition);
         boolean moveStatus = possibleMoves(cPos,newPos);
-        if(!moveStatus){
+        if (moveStatus) {
+            System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
+        } else {
             System.out.println("Not a vaild position, try again.");
             return moveStatus;
-        } else {
-            System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
         }
 
-        boolean allowedMoveStatus = allowedMoves(newPos);
+        boolean allowedMoveStatus = allowedMoves(newPos,currentBoard);
 
-        if(!allowedMoveStatus){
+        if (allowedMoveStatus) {
+            System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
+        } else {
             System.out.println("Not an allowed position, try again.");
             return allowedMoveStatus;
-        } else {
-            System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
         }
 
         if(allowedMoveStatus){
@@ -79,6 +79,7 @@ public class Bishop extends Piece {
             if(!currentBoard.xIDPositionAssoc.containsValue(newPosition)) {
                 currentBoard.populatePieces(this);
             } else {
+                System.out.println("This is a kill");
                 killFunction(newPosition,currentBoard);
                 currentBoard.populatePieces(this);
             }
@@ -161,7 +162,7 @@ public class Bishop extends Piece {
         return validMoves;
     }
 
-    public boolean allowedMoves(Integer newPosition) {
+    public boolean allowedMoves(Integer newPosition, Board currentBoard) {
         /*
         find position occupied by pieces in the diagonal array and move there
         if same color found, move to that (square-1)
@@ -174,7 +175,7 @@ public class Bishop extends Piece {
         while((!condition)&&(i<possibleMovesDiagonal1.size())){
             Integer currentPosition = possibleMovesDiagonal1.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.positionPieceAssoc.get(exID);
+            Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesDiagonal1.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -196,7 +197,7 @@ public class Bishop extends Piece {
         while((!condition)&&(i<possibleMovesDiagonal2.size())){
             Integer currentPosition = possibleMovesDiagonal2.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.positionPieceAssoc.get(exID);
+            Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesDiagonal2.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -218,7 +219,7 @@ public class Bishop extends Piece {
         while((!condition)&&(i<possibleMovesDiagonal3.size())){
             Integer currentPosition = possibleMovesDiagonal3.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.positionPieceAssoc.get(exID);
+            Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesDiagonal3.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -240,7 +241,7 @@ public class Bishop extends Piece {
         while((!condition)&&(i<possibleMovesDiagonal4.size())){
             Integer currentPosition = possibleMovesDiagonal4.get(i);
             String exID = this.xIDResolver(currentPosition);
-            Piece tempPiece = Board.positionPieceAssoc.get(exID);
+            Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesDiagonal4.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
@@ -296,10 +297,9 @@ public class Bishop extends Piece {
     }
 
     public void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException {
-        Piece killedPiece  = Board.positionPieceAssoc.get(newPosition);
+        Piece killedPiece  = currentBoard.positionPieceAssoc.get(newPosition);
         currentBoard.removePieces(currentBoard.positionPieceAssoc.get(newPosition));
         if(killedPiece.color == piece_color.BLACK){
-            System.out.println("This is a kill");
             killedPiece.currentPos = "DEAD";
             currentBoard.deadBlackPieces.add(killedPiece);
         } else if (killedPiece.color == piece_color.WHITE) {
@@ -308,7 +308,6 @@ public class Bishop extends Piece {
         } else {
             throw new IllegalArgumentException("Unknown dead piece!");
         }
-
 
     }
 
@@ -363,12 +362,12 @@ public class Bishop extends Piece {
 
     @Override
     public String toString() {
-        StringBuffer buf = new StringBuffer();
-        buf.append("ID: "+xID+"\n");
-        buf.append("Piece type: "+type+"\n");
-        buf.append("Piece color: "+color+"\n");
-        buf.append("Current Position: "+currentPos+"\n");
-        return buf.toString();
+        String buf = "";
+        buf = buf.concat("ID: "+xID+"\n");
+        buf = buf.concat("Piece type: "+type+"\n");
+        buf = buf.concat("Piece color: "+color+"\n");
+        buf = buf.concat("Current Position: "+currentPos+"\n");
+        return buf;
     }
 
 
