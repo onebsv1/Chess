@@ -132,12 +132,6 @@ public class Rook extends Piece {
             }
         }
 
-        currentPos = tempPos;
-
-        //while index !in (starting col && starting row)
-        //pushback currpos-9
-        //end
-
         return validMoves;
     }
     public boolean allowedMoves(Integer newPosition, Board currentBoard) {
@@ -148,9 +142,7 @@ public class Rook extends Piece {
          */
 
         System.out.println("\nLeft: ");
-        int i = 0;
-        boolean condition = false;
-        while((!condition)&&(i<possibleMovesLeft.size())){
+        for (Integer i = 0; i < possibleMovesLeft.size(); i++) {
             Integer currentPosition = possibleMovesLeft.get(i);
             String exID = this.xIDResolver(currentPosition);
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
@@ -159,20 +151,18 @@ public class Rook extends Piece {
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesLeft.add(currentPosition);
-                condition = true;
                 System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                break;
             } else if (tempPiece.color == this.color){
-                condition = true;
                 System.out.println("Same: "+this.xIDResolver(currentPosition));
+                break;
             }
-            i=i+1;
+
         }
 
         System.out.println("\nTop: ");
 
-        i=0;
-        condition=false;
-        while((!condition)&&(i<possibleMovesTop.size())){
+        for (Integer i = 0; i < possibleMovesTop.size(); i++) {
             Integer currentPosition = possibleMovesTop.get(i);
             String exID = this.xIDResolver(currentPosition);
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
@@ -181,20 +171,18 @@ public class Rook extends Piece {
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesTop.add(currentPosition);
-                condition = true;
                 System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                break;
             } else if (tempPiece.color == this.color){
-                condition = true;
                 System.out.println("Same: "+this.xIDResolver(currentPosition));
+                break;
             }
-            i=i+1;
+
         }
 
         System.out.println("\nRight: ");
 
-        i=0;
-        condition=false;
-        while((!condition)&&(i<possibleMovesRight.size())){
+        for (Integer i = 0; i < possibleMovesRight.size(); i++) {
             Integer currentPosition = possibleMovesRight.get(i);
             String exID = this.xIDResolver(currentPosition);
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
@@ -203,20 +191,18 @@ public class Rook extends Piece {
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesRight.add(currentPosition);
-                condition = true;
                 System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                break;
             } else if (tempPiece.color == this.color){
-                condition = true;
                 System.out.println("Same: "+this.xIDResolver(currentPosition));
+                break;
             }
-            i=i+1;
+
         }
 
         System.out.println("\nBottom: ");
 
-        i=0;
-        condition=false;
-        while((!condition)&&(i<possibleMovesBottom.size())){
+        for (Integer i = 0; i < possibleMovesBottom.size(); i++) {
             Integer currentPosition = possibleMovesBottom.get(i);
             String exID = this.xIDResolver(currentPosition);
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
@@ -225,13 +211,13 @@ public class Rook extends Piece {
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesBottom.add(currentPosition);
-                condition = true;
                 System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                break;
             } else if (tempPiece.color == this.color){
-                condition = true;
                 System.out.println("Same: "+this.xIDResolver(currentPosition));
+                break;
             }
-            i=i+1;
+
         }
 
         boolean allowedMoveStatus = false;

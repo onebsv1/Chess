@@ -152,12 +152,7 @@ public class Bishop extends Piece {
                 validMoves = true;
             }
         }
-
-        currentPos = tempPos;
-
-        //while index !in (starting col && starting row)
-        //pushback currpos-9
-        //end
+        
 
         return validMoves;
     }
@@ -170,90 +165,87 @@ public class Bishop extends Piece {
          */
 
         System.out.println("\nTop Left: ");
-        int i = 0;
-        boolean condition = false;
-        while((!condition)&&(i<possibleMovesDiagonal1.size())){
-            Integer currentPosition = possibleMovesDiagonal1.get(i);
+        for (Integer j = 0; j < possibleMovesDiagonal1.size(); j++) {
+
+            Integer currentPosition = possibleMovesDiagonal1.get(j);
             String exID = this.xIDResolver(currentPosition);
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
+
             if(tempPiece == null){
                 allowedMovesDiagonal1.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesDiagonal1.add(currentPosition);
-                condition = true;
                 System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                break;
             } else if (tempPiece.color == this.color){
-                condition = true;
                 System.out.println("Same: "+this.xIDResolver(currentPosition));
+                break;
             }
-            i=i+1;
         }
 
         System.out.println("\nTop Right: ");
 
-        i=0;
-        condition=false;
-        while((!condition)&&(i<possibleMovesDiagonal2.size())){
-            Integer currentPosition = possibleMovesDiagonal2.get(i);
+
+        for (Integer j = 0; j < possibleMovesDiagonal2.size(); j++) {
+
+            Integer currentPosition = possibleMovesDiagonal2.get(j);
             String exID = this.xIDResolver(currentPosition);
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
+
             if(tempPiece == null){
                 allowedMovesDiagonal2.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesDiagonal2.add(currentPosition);
-                condition = true;
                 System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                break;
             } else if (tempPiece.color == this.color){
-                condition = true;
                 System.out.println("Same: "+this.xIDResolver(currentPosition));
+                break;
             }
-            i=i+1;
         }
 
         System.out.println("\nBottom Right: ");
 
-        i=0;
-        condition=false;
-        while((!condition)&&(i<possibleMovesDiagonal3.size())){
-            Integer currentPosition = possibleMovesDiagonal3.get(i);
+        for (Integer j = 0; j < possibleMovesDiagonal3.size(); j++) {
+
+            Integer currentPosition = possibleMovesDiagonal3.get(j);
             String exID = this.xIDResolver(currentPosition);
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
+
             if(tempPiece == null){
                 allowedMovesDiagonal3.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesDiagonal3.add(currentPosition);
-                condition = true;
                 System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                break;
             } else if (tempPiece.color == this.color){
-                condition = true;
                 System.out.println("Same: "+this.xIDResolver(currentPosition));
+                break;
             }
-            i=i+1;
         }
 
         System.out.println("\nBottom Left: ");
 
-        i=0;
-        condition=false;
-        while((!condition)&&(i<possibleMovesDiagonal4.size())){
-            Integer currentPosition = possibleMovesDiagonal4.get(i);
+        for (Integer j = 0; j < possibleMovesDiagonal4.size(); j++) {
+
+            Integer currentPosition = possibleMovesDiagonal4.get(j);
             String exID = this.xIDResolver(currentPosition);
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
+
             if(tempPiece == null){
                 allowedMovesDiagonal4.add(currentPosition);
                 System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesDiagonal4.add(currentPosition);
-                condition = true;
                 System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                break;
             } else if (tempPiece.color == this.color){
-                condition = true;
                 System.out.println("Same: "+this.xIDResolver(currentPosition));
+                break;
             }
-            i=i+1;
         }
 
         boolean allowedMoveStatus = false;
