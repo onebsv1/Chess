@@ -152,7 +152,7 @@ public class Bishop extends Piece {
                 validMoves = true;
             }
         }
-        
+
 
         return validMoves;
     }
