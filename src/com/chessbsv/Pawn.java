@@ -169,7 +169,6 @@ public class Pawn extends Piece {
         for (int j = 0; j < possibleMoves.size(); j++) {
             Integer currentPosition = possibleMoves.get(j);
             String exID = this.xIDResolver(currentPosition);
-            //System.out.println(exID);
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 if(j==0) { //If "Center" && nothing in front
@@ -179,14 +178,22 @@ public class Pawn extends Piece {
                     if(this.isFirstMove){
                         if (this.color == piece_color.WHITE){
                             if(validPosition(currentPosition-8)){
-                                allowedMoves.add(currentPosition-8);
-                                System.out.println("Nothing: " + this.xIDResolver(currentPosition-8));
+                                exID = this.xIDResolver(currentPosition-8);
+                                tempPiece = currentBoard.positionPieceAssoc.get(exID);
+                                if(tempPiece == null) {
+                                    allowedMoves.add(currentPosition - 8);
+                                    System.out.println("Nothing: " + this.xIDResolver(currentPosition - 8));
+                                }
                             }
 
                         } else if(this.color == piece_color.BLACK){
                             if(validPosition(currentPosition+8)){
-                                allowedMoves.add(currentPosition+8);
-                                System.out.println("Nothing: " + this.xIDResolver(currentPosition+8));
+                                exID = this.xIDResolver(currentPosition+8);
+                                tempPiece = currentBoard.positionPieceAssoc.get(exID);
+                                if(tempPiece == null) {
+                                    allowedMoves.add(currentPosition+8);
+                                    System.out.println("Nothing: " + this.xIDResolver(currentPosition + 8));
+                                }
                             }
 
                         }
