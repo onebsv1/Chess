@@ -293,10 +293,10 @@ public class Bishop extends Piece {
     public void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException {
         Piece killedPiece  = currentBoard.positionPieceAssoc.get(newPosition);
         currentBoard.removePieces(currentBoard.positionPieceAssoc.get(newPosition));
-        if(killedPiece.color == piece_color.BLACK){
+        if((killedPiece.color == piece_color.BLACK) &&(this.color == piece_color.WHITE)){
             killedPiece.currentPos = "DEAD";
             currentBoard.deadBlackPieces.add(killedPiece);
-        } else if (killedPiece.color == piece_color.WHITE) {
+        } else if ((killedPiece.color == piece_color.WHITE) && (this.color == piece_color.BLACK)) {
             killedPiece.currentPos = "DEAD";
             currentBoard.deadWhitePieces.add(killedPiece);
         } else {

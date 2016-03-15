@@ -186,10 +186,8 @@ public class King extends Piece{
          */
 
         //System.out.println("\nTop Left: ");
-        int i = 0;
-        boolean condition = false;
-        while((!condition)&&(i<possibleMoves.size())){
-            Integer currentPosition = possibleMoves.get(i);
+        for (int j = 0; j < possibleMoves.size(); j++) {
+            Integer currentPosition = possibleMoves.get(j);
             String exID = this.xIDResolver(currentPosition);
             //System.out.println(exID);
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
@@ -202,7 +200,7 @@ public class King extends Piece{
             } else if (tempPiece.color == this.color){
                 System.out.println("Same: "+this.xIDResolver(currentPosition));
             }
-            i=i+1;
+
         }
 
         boolean allowedMoveStatus = false;
@@ -222,21 +220,17 @@ public class King extends Piece{
     }
 
     public void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException {
-        Piece killedPiece  = Board.positionPieceAssoc.get(newPosition);
+        Piece killedPiece  = currentBoard.positionPieceAssoc.get(newPosition);
         currentBoard.removePieces(currentBoard.positionPieceAssoc.get(newPosition));
-        if(killedPiece.color == Piece.piece_color.BLACK){
-            System.out.println("This is a kill");
+        if((killedPiece.color == piece_color.BLACK) &&(this.color == piece_color.WHITE)){
             killedPiece.currentPos = "DEAD";
             currentBoard.deadBlackPieces.add(killedPiece);
-        } else if (killedPiece.color == Piece.piece_color.WHITE) {
-            System.out.println("This is a kill");
+        } else if ((killedPiece.color == piece_color.WHITE) && (this.color == piece_color.BLACK)) {
             killedPiece.currentPos = "DEAD";
             currentBoard.deadWhitePieces.add(killedPiece);
         } else {
             throw new IllegalArgumentException("Unknown dead piece!");
         }
-
-
     }
 
 
