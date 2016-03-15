@@ -21,6 +21,7 @@ public abstract class Piece {
     public abstract boolean dispMove(String d1, Board board);
     public abstract boolean possibleMoves(Integer currentPos, Integer newPosition);
     public abstract boolean allowedMoves(Integer newPosition, Board currentBoard);
+    public abstract void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException;
 
     HashMap<String,Integer> alphaNum = new HashMap<>();
     HashMap<Integer,String> numAlpha = new HashMap<>();

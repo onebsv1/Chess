@@ -29,6 +29,21 @@ public class Pawn extends Piece {
     }
 
     @Override
+    public boolean possibleMoves(Integer currentPos, Integer newPosition) {
+        return false;
+    }
+
+    @Override
+    public boolean allowedMoves(Integer newPosition, Board currentBoard) {
+        return false;
+    }
+
+    @Override
+    public void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException {
+
+    }
+
+    @Override
     public String toString() {
         String buf = "";
         buf = buf.concat("ID: "+xID+"\n");
