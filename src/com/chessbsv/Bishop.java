@@ -56,6 +56,9 @@ public class Bishop extends Piece {
         String curPos = this.currentPos;
         Integer cPos = this.positionResolver(curPos);
         Integer newPos = this.positionResolver(newPosition);
+
+
+
         boolean moveStatus = possibleMoves(cPos,newPos);
         if (moveStatus) {
             System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
@@ -65,7 +68,6 @@ public class Bishop extends Piece {
         }
 
         boolean allowedMoveStatus = allowedMoves(newPos,currentBoard);
-
         if (allowedMoveStatus) {
             System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
         } else {

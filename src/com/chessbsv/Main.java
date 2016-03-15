@@ -31,7 +31,6 @@ public class Main {
         } catch (IllegalArgumentException e){
             System.out.println("Enter a vaild position.");
             e.printStackTrace();
-            return;
         }
     }
 

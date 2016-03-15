@@ -181,10 +181,9 @@ public class Knight extends Piece{
          */
 
         //System.out.println("\nTop Left: ");
-        int i = 0;
-        boolean condition = false;
-        while((!condition)&&(i<possibleMoves.size())){
-            Integer currentPosition = possibleMoves.get(i);
+
+        for (int j = 0; j < possibleMoves.size(); j++) {
+            Integer currentPosition = possibleMoves.get(j);
             String exID = this.xIDResolver(currentPosition);
             //System.out.println(exID);
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
@@ -197,7 +196,7 @@ public class Knight extends Piece{
             } else if (tempPiece.color == this.color){
                 System.out.println("Same: "+this.xIDResolver(currentPosition));
             }
-            i=i+1;
+
         }
 
         boolean allowedMoveStatus = false;
