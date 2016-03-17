@@ -19,6 +19,7 @@ public class Rook extends Piece {
     ArrayList<Integer> allowedMovesTop = new ArrayList<>();
     ArrayList<Integer> allowedMovesRight = new ArrayList<>();
     ArrayList<Integer> allowedMovesBottom = new ArrayList<>();
+    ArrayList<Integer> allowedMoves = new ArrayList<>();
 
     HashSet<Integer> Left = new HashSet<>();
     HashSet<Integer> Top = new HashSet<>();
@@ -223,24 +224,28 @@ public class Rook extends Piece {
         boolean allowedMoveStatus = false;
 
         for (int j = 0; j < allowedMovesLeft.size(); j++) {
+            allowedMoves.add(allowedMovesLeft.get(j));
             if(newPosition == allowedMovesLeft.get(j)){
                 allowedMoveStatus = true;
             }
         }
 
         for (int j = 0; j < allowedMovesTop.size(); j++) {
+            allowedMoves.add(allowedMovesTop.get(j));
             if(newPosition == allowedMovesTop.get(j)){
                 allowedMoveStatus = true;
             }
         }
 
         for (int j = 0; j < allowedMovesRight.size(); j++) {
+            allowedMoves.add(allowedMovesRight.get(j));
             if(newPosition == allowedMovesRight.get(j)){
                 allowedMoveStatus = true;
             }
         }
 
         for (int j = 0; j < allowedMovesBottom.size(); j++) {
+            allowedMoves.add(allowedMovesBottom.get(j));
             if(newPosition == allowedMovesBottom.get(j)){
                 allowedMoveStatus = true;
             }
@@ -251,10 +256,13 @@ public class Rook extends Piece {
         possibleMovesRight.clear();
         possibleMovesBottom.clear();
 
+        updateKingHash(allowedMoves);
+
         allowedMovesLeft.clear();
         allowedMovesTop.clear();
         allowedMovesRight.clear();
         allowedMovesBottom.clear();
+        allowedMoves.clear();
 
         return allowedMoveStatus;
 
@@ -274,6 +282,27 @@ public class Rook extends Piece {
             throw new IllegalArgumentException("Unknown dead piece!");
         }
 
+
+    }
+
+    public void updateKingHash(ArrayList<Integer> allowedMoves){
+        String tempPos = new String();
+        for (Integer x: allowedMoves) {
+            tempPos = xIDResolver(x);
+            if(kingsEight.containsKey(tempPos)){
+                kingsEight.replace(tempPos,false);
+            }
+        }
+    }
+
+    public void sonar(String currentPos, String newPos, Board currentBoard){
+
+        for (String pos : kingsEight.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard);
+        }
 
     }
 
