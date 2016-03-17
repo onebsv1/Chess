@@ -236,6 +236,10 @@ public class Pawn extends Piece {
             if(kingsEight.containsKey(tempPos)){
                 kingsEight.replace(tempPos,false);
             }
+
+            if(kingsPos.containsKey(tempPos)){
+                kingsPos.replace(tempPos,false);
+            }
         }
     }
 
