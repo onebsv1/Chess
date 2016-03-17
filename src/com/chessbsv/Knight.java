@@ -16,7 +16,6 @@ public class Knight extends Piece{
     */
 
     ArrayList<Integer> allowedMoves= new ArrayList<>();
-    
 
 
     Knight(String xID, String currentPos, Piece.piece_color color, Piece.piece_type type) throws IllegalArgumentException {
@@ -167,7 +166,6 @@ public class Knight extends Piece{
                 validMoves = true;
             }
         }
-        currentPos = tempPos;
 
 
         return validMoves;
@@ -209,7 +207,9 @@ public class Knight extends Piece{
 
 
         possibleMoves.clear();
+        updateKingHash(allowedMoves);
         allowedMoves.clear();
+
 
         return allowedMoveStatus;
 
@@ -226,6 +226,27 @@ public class Knight extends Piece{
             currentBoard.deadWhitePieces.add(killedPiece);
         } else {
             throw new IllegalArgumentException("Unknown dead piece!");
+        }
+
+    }
+
+    public void updateKingHash(ArrayList<Integer> allowedMoves){
+        String tempPos = new String();
+        for (Integer x: allowedMoves) {
+            tempPos = xIDResolver(x);
+            if(kingsEight.containsKey(tempPos)){
+                kingsEight.replace(tempPos,false);
+            }
+        }
+    }
+
+    public void sonar(String currentPos, String newPos, Board currentBoard){
+
+        for (String pos : kingsEight.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard);
         }
 
     }

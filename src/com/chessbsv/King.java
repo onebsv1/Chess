@@ -219,17 +219,33 @@ public class King extends Piece{
 
     public boolean checkEight(Integer newPos,Board currentBoard){
 
+        loadKingHash(kingsEight,kingsPos);
+
         for (Piece p: currentBoard.positionPieceAssoc.values()) {
             for (String pos :kingsEight.keySet()) {
                 if(p.color != this.color) p.sonar(p.currentPos, pos, currentBoard);
             }
         }
 
-        if(kingsEight.containsKey(xIDResolver(newPos))){
-            return false;
-        } else {
+        if(kingsEight.get(newPos).booleanValue()){
             return true;
+        } else {
+            return false;
         }
+    }
+
+    private void loadKingHash(HashMap<String, Boolean> kingsEight, HashMap<String, Boolean> kingsPos) {
+
+        kingsEight.put(xIDResolver(positionResolver(currentPos)-1),true);
+        kingsEight.put(xIDResolver(positionResolver(currentPos)-7),true);
+        kingsEight.put(xIDResolver(positionResolver(currentPos)-9),true);
+        kingsEight.put(xIDResolver(positionResolver(currentPos)-8),true);
+        kingsEight.put(xIDResolver(positionResolver(currentPos)+1),true);
+        kingsEight.put(xIDResolver(positionResolver(currentPos)+7),true);
+        kingsEight.put(xIDResolver(positionResolver(currentPos)+9),true);
+        kingsEight.put(xIDResolver(positionResolver(currentPos)+8),true);
+
+        kingsPos.put(currentPos,true);
     }
 
     public void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException {
@@ -246,7 +262,27 @@ public class King extends Piece{
         }
     }
 
+    @Override
+    public void sonar(String currentPos, String newPos, Board currentBoard) {
+        for (String pos : kingsEight.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard);
+        }
+    }
 
+    @Override
+    public void updateKingHash(ArrayList<Integer> allowedMoves) {
+        String tempPos = new String();
+        for (Integer x: allowedMoves) {
+            tempPos = xIDResolver(x);
+            if(kingsEight.containsKey(tempPos)){
+                kingsEight.replace(tempPos,false);
+            }
+        }
+
+    }
 
 
     @Override
