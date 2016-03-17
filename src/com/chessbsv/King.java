@@ -21,9 +21,6 @@ public class King extends Piece{
 
     ArrayList<Integer> allowedMoves= new ArrayList<>();
 
-    HashMap<String,Boolean> kingPos = new HashMap<>();
-    HashMap<String,Boolean> king8Pos = new HashMap<>();
-
     King(String xID, String currentPos, Piece.piece_color color, Piece.piece_type type) throws IllegalArgumentException {
         this.xID = xID;
         this.color = color;
@@ -57,6 +54,8 @@ public class King extends Piece{
         } else {
             System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
         }
+
+        boolean checkEightStatus = checkEight(newPos,currentBoard);
 
         if(allowedMoveStatus){
             currentBoard.removePieces(this);
@@ -172,7 +171,6 @@ public class King extends Piece{
                 validMoves = true;
             }
         }
-        currentPos = tempPos;
 
 
         return validMoves;
@@ -219,6 +217,16 @@ public class King extends Piece{
 
     }
 
+    public boolean checkEight(Integer newPos,Board currentBoard){
+
+        for (Piece p: currentBoard.positionPieceAssoc.values()) {
+
+        }
+
+
+        return false;
+    }
+
     public void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException {
         Piece killedPiece  = currentBoard.positionPieceAssoc.get(newPosition);
         currentBoard.removePieces(currentBoard.positionPieceAssoc.get(newPosition));
@@ -232,6 +240,8 @@ public class King extends Piece{
             throw new IllegalArgumentException("Unknown dead piece!");
         }
     }
+
+
 
 
     @Override

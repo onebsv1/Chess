@@ -28,6 +28,8 @@ public class Bishop extends Piece {
     ArrayList<Integer> allowedMovesDiagonal3 = new ArrayList<>();
     ArrayList<Integer> allowedMovesDiagonal4 = new ArrayList<>();
 
+    ArrayList<Integer> allowedMoves = new ArrayList<>();
+
     /*
     Boundary Hashes to determine out of bounds check, while
     populating the diagonals.
@@ -253,24 +255,28 @@ public class Bishop extends Piece {
         boolean allowedMoveStatus = false;
 
         for (int j = 0; j < allowedMovesDiagonal1.size(); j++) {
+            allowedMoves.add(allowedMovesDiagonal1.get(j));
             if(newPosition == allowedMovesDiagonal1.get(j)){
                 allowedMoveStatus = true;
             }
         }
 
         for (int j = 0; j < allowedMovesDiagonal2.size(); j++) {
+            allowedMoves.add(allowedMovesDiagonal2.get(j));
             if(newPosition == allowedMovesDiagonal2.get(j)){
                 allowedMoveStatus = true;
             }
         }
 
         for (int j = 0; j < allowedMovesDiagonal3.size(); j++) {
+            allowedMoves.add(allowedMovesDiagonal3.get(j));
             if(newPosition == allowedMovesDiagonal3.get(j)){
                 allowedMoveStatus = true;
             }
         }
 
         for (int j = 0; j < allowedMovesDiagonal4.size(); j++) {
+            allowedMoves.add(allowedMovesDiagonal4.get(j));
             if(newPosition == allowedMovesDiagonal4.get(j)){
                 allowedMoveStatus = true;
             }
@@ -280,6 +286,8 @@ public class Bishop extends Piece {
         possibleMovesDiagonal2.clear();
         possibleMovesDiagonal3.clear();
         possibleMovesDiagonal4.clear();
+
+        updateKingHash(allowedMoves);
 
         allowedMovesDiagonal1.clear();
         allowedMovesDiagonal2.clear();
@@ -304,6 +312,27 @@ public class Bishop extends Piece {
         }
 
     }
+
+    public void updateKingHash(ArrayList<Integer> allowedMoves){
+        String tempPos = new String();
+        for (Integer x: allowedMoves) {
+            tempPos = xIDResolver(x);
+            if(kingsEight.containsKey(tempPos)){
+                kingsEight.replace(tempPos,false);
+            }
+        }
+    }
+
+    public void sonar(Integer currentPos, Integer newPos, Board currentBoard){
+        for (String pos : kingsEight.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            possibleMoves(currentPos,sqpos);
+            allowedMoves(sqpos,currentBoard);
+
+        }
+
+    }
+
 
 
     public void loadtopLeft(){

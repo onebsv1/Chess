@@ -26,6 +26,9 @@ public abstract class Piece {
     HashMap<String,Integer> alphaNum = new HashMap<>();
     HashMap<Integer,String> numAlpha = new HashMap<>();
 
+    HashMap<String,Boolean> kingsPos = new HashMap<>();
+    HashMap<String,Boolean> kingsEight = new HashMap<>();
+
     public int positionResolver(String pos){
 
         //Takes in position in the form of a string,
