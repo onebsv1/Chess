@@ -59,7 +59,7 @@ public class Bishop extends Piece {
         Integer cPos = this.positionResolver(curPos);
         Integer newPos = this.positionResolver(newPosition);
 
-
+        three_state blk = three_state.NEITHER;
 
         boolean moveStatus = possibleMoves(cPos,newPos);
         if (moveStatus) {
@@ -69,7 +69,7 @@ public class Bishop extends Piece {
             return moveStatus;
         }
 
-        boolean allowedMoveStatus = allowedMoves(newPos,currentBoard);
+        boolean allowedMoveStatus = allowedMoves(newPos,currentBoard,blk);
         if (allowedMoveStatus) {
             System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
         } else {
@@ -161,7 +161,8 @@ public class Bishop extends Piece {
         return validMoves;
     }
 
-    public boolean allowedMoves(Integer newPosition, Board currentBoard) {
+    @Override
+    public boolean allowedMoves(Integer newPosition, Board currentBoard, three_state blk) {
         /*
         find position occupied by pieces in the diagonal array and move there
         if same color found, move to that (square-1)
@@ -287,7 +288,12 @@ public class Bishop extends Piece {
         possibleMovesDiagonal3.clear();
         possibleMovesDiagonal4.clear();
 
-        updateKingHash(allowedMoves,currentBoard);
+        if(blk == three_state.BLACK){
+            updateBlkKingHash(allowedMoves,currentBoard);
+        } else if(blk == three_state.WHITE){
+            updateWhtKingHash(allowedMoves,currentBoard);
+        } else {
+        }
 
         allowedMovesDiagonal1.clear();
         allowedMovesDiagonal2.clear();
@@ -314,31 +320,49 @@ public class Bishop extends Piece {
 
     }
 
-    public void updateKingHash(ArrayList<Integer> allowedMoves,Board currentBoard){
+    // ########################## whtSonar <-> blkKingHashes ##########################
+
+    public void updateBlkKingHash(ArrayList<Integer> allowedMoves,Board currentBoard){
         String tempPos = new String();
         for (Integer x: allowedMoves) {
             tempPos = xIDResolver(x);
-            if(currentBoard.kingsEight.containsKey(tempPos)){
-                currentBoard.kingsEight.replace(tempPos,false);
+            if(currentBoard.blkKingsEight.containsKey(tempPos)){
+                currentBoard.blkKingsEight.replace(tempPos,false);
             }
 
-            if(currentBoard.kingsPos.containsKey(tempPos)){
-                currentBoard.kingsPos.replace(tempPos,false);
+            if(currentBoard.blkKingsPos.containsKey(tempPos)){
+                currentBoard.blkKingsPos.replace(tempPos,false);
             }
         }
     }
 
-    public void sonar(String currentPos, String newPos, Board currentBoard){
+    public void whtSonar(String currentPos, String newPos, Board currentBoard){
 
-        for (String pos : currentBoard.kingsEight.keySet()) {
+        three_state blk = three_state.BLACK;
+
+        for (String pos : currentBoard.blkKingsEight.keySet()) {
             Integer sqpos = positionResolver(pos);
             Integer curPos = positionResolver(currentPos);
             possibleMoves(curPos,sqpos);
-            allowedMoves(sqpos,currentBoard);
+            allowedMoves(sqpos,currentBoard,blk);
         }
 
     }
 
+
+    // ########################## blkSonar <-> whtKingHashes ##########################
+
+
+    @Override
+    public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
+
+    }
+
+
+    @Override
+    public void blkSonar(String currentPos, String newPos, Board currentBoard) {
+
+    }
 
 
     public void loadtopLeft(){

@@ -2,7 +2,6 @@ package com.chessbsv;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 
 /**
@@ -39,6 +38,9 @@ public class King extends Piece{
         Integer cPos = this.positionResolver(curPos);
         Integer newPos = this.positionResolver(newPosition);
         boolean moveStatus = possibleMoves(cPos,newPos);
+
+        three_state blk = three_state.NEITHER;
+
         if(!moveStatus){
             System.out.println("Not a vaild position, try again.");
             return moveStatus;
@@ -46,7 +48,7 @@ public class King extends Piece{
             System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
         }
 
-        boolean allowedMoveStatus = allowedMoves(newPos, currentBoard);
+        boolean allowedMoveStatus = allowedMoves(newPos,currentBoard,blk);
 
         if(!allowedMoveStatus){
             System.out.println("Not an allowed position, try again.");
@@ -176,7 +178,8 @@ public class King extends Piece{
         return validMoves;
     }
 
-    public boolean allowedMoves(Integer newPosition, Board currentBoard) {
+    @Override
+    public boolean allowedMoves(Integer newPosition, Board currentBoard, three_state blk) {
         /*
         find position occupied by pieces in the diagonal array and move there
         if same color found, move to that (square-1)
@@ -211,6 +214,15 @@ public class King extends Piece{
 
 
         possibleMoves.clear();
+
+        if(blk == three_state.BLACK){
+            updateBlkKingHash(allowedMoves,currentBoard);
+        } else if(blk == three_state.WHITE){
+            updateWhtKingHash(allowedMoves,currentBoard);
+        } else {
+        }
+
+
         allowedMoves.clear();
 
         return allowedMoveStatus;
@@ -219,35 +231,84 @@ public class King extends Piece{
 
     public boolean checkEight(Integer newPos,Board currentBoard){
 
-        loadKingHash(currentBoard.kingsEight,currentBoard.kingsPos);
+        if(this.color.equals(piece_color.WHITE)) {
 
-        for (Piece p: currentBoard.positionPieceAssoc.values()) {
-            for (String pos :currentBoard.kingsEight.keySet()) {
-                if(p.color != this.color) p.sonar(p.currentPos, pos, currentBoard);
+            loadWhtKingHash(currentBoard.whtKingsEight, currentBoard.whtKingsPos);
+
+            for (Piece p : currentBoard.positionPieceAssoc.values()) {
+                for (String pos : currentBoard.whtKingsEight.keySet()) {
+                    if (p.color != this.color) p.blkSonar(p.currentPos, pos, currentBoard);
+                }
             }
+
+            if (currentBoard.whtKingsEight.get(newPos).booleanValue()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } else if (this.color.equals(piece_color.BLACK)){
+            loadBlkKingHash(currentBoard.blkKingsEight, currentBoard.blkKingsPos);
+
+            for (Piece p : currentBoard.positionPieceAssoc.values()) {
+                for (String pos : currentBoard.blkKingsEight.keySet()) {
+                    if (p.color != this.color) p.whtSonar(p.currentPos, pos, currentBoard);
+                }
+            }
+
+            if (currentBoard.blkKingsEight.get(newPos).booleanValue()) {
+                return true;
+            } else {
+                return false;
+            }
+            
         }
 
-        if(currentBoard.kingsEight.get(newPos).booleanValue()){
-            return true;
-        } else {
-            return false;
-        }
+
+        return false;
     }
 
-    private void loadKingHash(HashMap<String, Boolean> kingsEight, HashMap<String, Boolean> kingsPos) {
-
-        kingsEight.put(xIDResolver(positionResolver(currentPos)-1),true);
-        kingsEight.put(xIDResolver(positionResolver(currentPos)-7),true);
-        kingsEight.put(xIDResolver(positionResolver(currentPos)-9),true);
-        kingsEight.put(xIDResolver(positionResolver(currentPos)-8),true);
-        kingsEight.put(xIDResolver(positionResolver(currentPos)+1),true);
-        kingsEight.put(xIDResolver(positionResolver(currentPos)+7),true);
-        kingsEight.put(xIDResolver(positionResolver(currentPos)+9),true);
-        kingsEight.put(xIDResolver(positionResolver(currentPos)+8),true);
-
-        kingsPos.put(currentPos,true);
+    public boolean checkForCheck(Board currentBoard){
+        return false;
     }
 
+    public boolean checkForMate(Board currentBoard){
+        return false;
+    }
+    
+    public void checkCondition(){
+        //set some flag in Board to move only this piece
+    }
+
+    private void loadWhtKingHash(HashMap<String, Boolean> whtKingsEight, HashMap<String, Boolean> whtKingsPos) {
+
+        whtKingsEight.put(xIDResolver(positionResolver(currentPos)-1),true);
+        whtKingsEight.put(xIDResolver(positionResolver(currentPos)-7),true);
+        whtKingsEight.put(xIDResolver(positionResolver(currentPos)-9),true);
+        whtKingsEight.put(xIDResolver(positionResolver(currentPos)-8),true);
+        whtKingsEight.put(xIDResolver(positionResolver(currentPos)+1),true);
+        whtKingsEight.put(xIDResolver(positionResolver(currentPos)+7),true);
+        whtKingsEight.put(xIDResolver(positionResolver(currentPos)+9),true);
+        whtKingsEight.put(xIDResolver(positionResolver(currentPos)+8),true);
+
+        whtKingsPos.put(currentPos,true);
+    }
+
+    private void loadBlkKingHash(HashMap<String, Boolean> blkKingsEight, HashMap<String, Boolean> blkKingsPos) {
+
+        blkKingsEight.put(xIDResolver(positionResolver(currentPos)-1),true);
+        blkKingsEight.put(xIDResolver(positionResolver(currentPos)-7),true);
+        blkKingsEight.put(xIDResolver(positionResolver(currentPos)-9),true);
+        blkKingsEight.put(xIDResolver(positionResolver(currentPos)-8),true);
+        blkKingsEight.put(xIDResolver(positionResolver(currentPos)+1),true);
+        blkKingsEight.put(xIDResolver(positionResolver(currentPos)+7),true);
+        blkKingsEight.put(xIDResolver(positionResolver(currentPos)+9),true);
+        blkKingsEight.put(xIDResolver(positionResolver(currentPos)+8),true);
+
+        blkKingsPos.put(currentPos,true);
+    }
+
+    @Override
     public void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException {
         Piece killedPiece  = currentBoard.positionPieceAssoc.get(newPosition);
         currentBoard.removePieces(currentBoard.positionPieceAssoc.get(newPosition));
@@ -263,13 +324,26 @@ public class King extends Piece{
     }
 
     @Override
-    public void sonar(String currentPos, String newPos, Board currentBoard) {
+    public void whtSonar(String currentPos, String newPos, Board currentBoard) {
+
+        return;
 
     }
 
     @Override
-    public void updateKingHash(ArrayList<Integer> allowedMoves) {
+    public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard ) {
 
+        return;
+
+    }
+
+    @Override
+    public void blkSonar(String currentPos, String newPos, Board currentBoard) {
+        
+    }
+
+    @Override
+    public void updateBlkKingHash(ArrayList<Integer> allowedMoves,Board currentBoard) {
 
     }
 

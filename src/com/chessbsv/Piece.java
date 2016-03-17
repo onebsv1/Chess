@@ -12,6 +12,7 @@ public abstract class Piece {
 
     public enum piece_color{BLACK,WHITE}
     public enum piece_type{BISHOP,KING,KNIGHT,PAWN,ROOK,QUEEN}
+    public enum three_state{BLACK,WHITE,NEITHER}
 
     //These are the basic properties of each piece.
     String xID;
@@ -21,10 +22,12 @@ public abstract class Piece {
 
     public abstract boolean dispMove(String d1, Board board);
     public abstract boolean possibleMoves(Integer currentPos, Integer newPosition);
-    public abstract boolean allowedMoves(Integer newPosition, Board currentBoard);
+    public abstract boolean allowedMoves(Integer newPosition, Board currentBoard, three_state blk);
     public abstract void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException;
-    public abstract void sonar(String currentPos, String newPos, Board currentBoard);
-    public abstract void updateKingHash(ArrayList<Integer> allowedMoves);
+    public abstract void whtSonar(String currentPos, String newPos, Board currentBoard);
+    public abstract void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard);
+    public abstract void blkSonar(String currentPos, String newPos, Board currentBoard);
+    public abstract void updateBlkKingHash(ArrayList<Integer> allowedMoves, Board currentBoard);
 
     HashMap<String,Integer> alphaNum = new HashMap<>();
     HashMap<Integer,String> numAlpha = new HashMap<>();

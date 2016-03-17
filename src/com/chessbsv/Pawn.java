@@ -45,6 +45,8 @@ public class Pawn extends Piece {
         Integer cPos = this.positionResolver(currPos);
         Integer newPos = this.positionResolver(newPosition);
 
+
+
         boolean moveStatus = possibleMoves(cPos,newPos);
         if (moveStatus) {
             System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
@@ -53,7 +55,7 @@ public class Pawn extends Piece {
             return moveStatus;
         }
 
-        boolean allowedMoveStatus = allowedMoves(newPos,currentBoard);
+        boolean allowedMoveStatus = allowedMoves(newPos,currentBoard,blk);
         if (allowedMoveStatus) {
             System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
         } else {
@@ -164,7 +166,7 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public boolean allowedMoves(Integer newPosition, Board currentBoard) {
+    public boolean allowedMoves(Integer newPosition, Board currentBoard, three_state blk) {
 
         for (int j = 0; j < possibleMoves.size(); j++) {
             Integer currentPosition = possibleMoves.get(j);
@@ -222,23 +224,12 @@ public class Pawn extends Piece {
 
 
         possibleMoves.clear();
-        updateKingHash(allowedMoves);
         allowedMoves.clear();
 
         return allowedMoveStatus;
     }
 
 
-    public void updateKingHash(ArrayList<Integer> allowedMoves){
-
-    }
-
-
-    public void sonar(String currentPos, String newPos, Board currentBoard){
-
-
-
-    }
 
     @Override
     public void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException {
@@ -253,6 +244,26 @@ public class Pawn extends Piece {
         } else {
             throw new IllegalArgumentException("Unknown dead piece!");
         }
+
+    }
+
+    @Override
+    public void whtSonar(String currentPos, String newPos, Board currentBoard) {
+
+    }
+
+    @Override
+    public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
+
+    }
+
+    @Override
+    public void blkSonar(String currentPos, String newPos, Board currentBoard) {
+
+    }
+
+    @Override
+    public void updateBlkKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
 
     }
 

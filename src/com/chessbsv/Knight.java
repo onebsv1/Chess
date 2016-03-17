@@ -1,7 +1,6 @@
 package com.chessbsv;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
  * Created by OM on 3/13/2016.
@@ -36,6 +35,8 @@ public class Knight extends Piece{
         Integer cPos = this.positionResolver(curPos);
         Integer newPos = this.positionResolver(newPosition);
         boolean moveStatus = possibleMoves(cPos,newPos);
+
+
         if(!moveStatus){
             System.out.println("Not a vaild position, try again.");
             return moveStatus;
@@ -43,7 +44,7 @@ public class Knight extends Piece{
             System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
         }
 
-        boolean allowedMoveStatus = allowedMoves(newPos, currentBoard);
+        boolean allowedMoveStatus = allowedMoves(newPos, currentBoard,blk);
 
         if(!allowedMoveStatus){
             System.out.println("Not an allowed position, try again.");
@@ -171,7 +172,8 @@ public class Knight extends Piece{
         return validMoves;
     }
 
-    public boolean allowedMoves(Integer newPosition, Board currentBoard) {
+    @Override
+    public boolean allowedMoves(Integer newPosition, Board currentBoard, three_state blk) {
         /*
         find position occupied by pieces in the diagonal array and move there
         if same color found, move to that (square-1)
@@ -227,6 +229,26 @@ public class Knight extends Piece{
         } else {
             throw new IllegalArgumentException("Unknown dead piece!");
         }
+
+    }
+
+    @Override
+    public void whtSonar(String currentPos, String newPos, Board currentBoard) {
+
+    }
+
+    @Override
+    public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
+
+    }
+
+    @Override
+    public void blkSonar(String currentPos, String newPos, Board currentBoard) {
+
+    }
+
+    @Override
+    public void updateBlkKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
 
     }
 

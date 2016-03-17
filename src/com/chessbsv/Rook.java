@@ -45,6 +45,9 @@ public class Rook extends Piece {
         Integer cPos = this.positionResolver(curPos);
         Integer newPos = this.positionResolver(newPosition);
         boolean moveStatus = possibleMoves(cPos,newPos);
+
+
+
         if (moveStatus) {
             System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
         } else {
@@ -52,7 +55,7 @@ public class Rook extends Piece {
             return moveStatus;
         }
 
-        boolean allowedMoveStatus = allowedMoves(newPos,currentBoard);
+        boolean allowedMoveStatus = allowedMoves(newPos,currentBoard,blk);
 
         if (allowedMoveStatus) {
             System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
@@ -135,7 +138,9 @@ public class Rook extends Piece {
 
         return validMoves;
     }
-    public boolean allowedMoves(Integer newPosition, Board currentBoard) {
+
+    @Override
+    public boolean allowedMoves(Integer newPosition, Board currentBoard, three_state blk) {
         /*
         find position occupied by pieces in the diagonal array and move there
         if same color found, move to that (square-1)
@@ -256,7 +261,6 @@ public class Rook extends Piece {
         possibleMovesRight.clear();
         possibleMovesBottom.clear();
 
-        updateKingHash(allowedMoves);
 
         allowedMovesLeft.clear();
         allowedMovesTop.clear();
@@ -285,13 +289,23 @@ public class Rook extends Piece {
 
     }
 
-    public void updateKingHash(ArrayList<Integer> allowedMoves){
+    @Override
+    public void whtSonar(String currentPos, String newPos, Board currentBoard) {
 
     }
 
-    public void sonar(String currentPos, String newPos, Board currentBoard){
+    @Override
+    public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
 
+    }
 
+    @Override
+    public void blkSonar(String currentPos, String newPos, Board currentBoard) {
+
+    }
+
+    @Override
+    public void updateBlkKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
 
     }
 
