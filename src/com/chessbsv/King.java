@@ -221,6 +221,10 @@ public class King extends Piece{
 
         for (Piece p: currentBoard.positionPieceAssoc.values()) {
 
+            if(p.color != this.color){
+
+            }
+
         }
 
 

@@ -293,6 +293,7 @@ public class Bishop extends Piece {
         allowedMovesDiagonal2.clear();
         allowedMovesDiagonal3.clear();
         allowedMovesDiagonal4.clear();
+        allowedMoves.clear();
 
         return allowedMoveStatus;
 
