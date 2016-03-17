@@ -1,5 +1,7 @@
 package com.chessbsv;
 
+import java.util.ArrayList;
+
 /**
  * Created by bsriniva on 2/23/16.
  */
@@ -32,6 +34,16 @@ public class Square {
 
         @Override
         public void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException {
+
+        }
+
+        @Override
+        public void sonar(String currentPos, String newPos, Board currentBoard) {
+
+        }
+
+        @Override
+        public void updateKingHash(ArrayList<Integer> allowedMoves) {
 
         }
 

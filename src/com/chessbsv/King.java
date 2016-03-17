@@ -220,15 +220,16 @@ public class King extends Piece{
     public boolean checkEight(Integer newPos,Board currentBoard){
 
         for (Piece p: currentBoard.positionPieceAssoc.values()) {
-
-            if(p.color != this.color){
-
+            for (String pos :kingsEight.keySet()) {
+                if(p.color != this.color) p.sonar(p.currentPos, pos, currentBoard);
             }
-
         }
 
-
-        return false;
+        if(kingsEight.containsKey(xIDResolver(newPos))){
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException {

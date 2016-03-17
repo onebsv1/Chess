@@ -324,12 +324,13 @@ public class Bishop extends Piece {
         }
     }
 
-    public void sonar(Integer currentPos, Integer newPos, Board currentBoard){
+    public void sonar(String currentPos, String newPos, Board currentBoard){
+
         for (String pos : kingsEight.keySet()) {
             Integer sqpos = positionResolver(pos);
-            possibleMoves(currentPos,sqpos);
+            Integer curPos = positionResolver(currentPos);
+            possibleMoves(curPos,sqpos);
             allowedMoves(sqpos,currentBoard);
-
         }
 
     }

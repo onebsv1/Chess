@@ -1,5 +1,6 @@
 package com.chessbsv;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -22,6 +23,8 @@ public abstract class Piece {
     public abstract boolean possibleMoves(Integer currentPos, Integer newPosition);
     public abstract boolean allowedMoves(Integer newPosition, Board currentBoard);
     public abstract void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException;
+    public abstract void sonar(String currentPos, String newPos, Board currentBoard);
+    public abstract void updateKingHash(ArrayList<Integer> allowedMoves);
 
     HashMap<String,Integer> alphaNum = new HashMap<>();
     HashMap<Integer,String> numAlpha = new HashMap<>();
