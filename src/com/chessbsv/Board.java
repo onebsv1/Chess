@@ -16,6 +16,10 @@ public class Board extends Square{
     public static HashMap<String,Piece> positionPieceAssoc = new HashMap<>();
     public static HashMap<String,String> xIDPositionAssoc = new HashMap<>();
 
+
+    public static HashMap<String,Boolean> kingsPos = new HashMap<>();
+    public static HashMap<String,Boolean> kingsEight = new HashMap<>();
+
     //These arrays contain the dead pieces, in order to be able to ressurect them
     //after PAWN advancment.
 

@@ -286,27 +286,12 @@ public class Rook extends Piece {
     }
 
     public void updateKingHash(ArrayList<Integer> allowedMoves){
-        String tempPos = new String();
-        for (Integer x: allowedMoves) {
-            tempPos = xIDResolver(x);
-            if(kingsEight.containsKey(tempPos)){
-                kingsEight.replace(tempPos,false);
-            }
 
-            if(kingsPos.containsKey(tempPos)){
-                kingsPos.replace(tempPos,false);
-            }
-        }
     }
 
     public void sonar(String currentPos, String newPos, Board currentBoard){
 
-        for (String pos : kingsEight.keySet()) {
-            Integer sqpos = positionResolver(pos);
-            Integer curPos = positionResolver(currentPos);
-            possibleMoves(curPos,sqpos);
-            allowedMoves(sqpos,currentBoard);
-        }
+
 
     }
 

@@ -219,15 +219,15 @@ public class King extends Piece{
 
     public boolean checkEight(Integer newPos,Board currentBoard){
 
-        loadKingHash(kingsEight,kingsPos);
+        loadKingHash(currentBoard.kingsEight,currentBoard.kingsPos);
 
         for (Piece p: currentBoard.positionPieceAssoc.values()) {
-            for (String pos :kingsEight.keySet()) {
+            for (String pos :currentBoard.kingsEight.keySet()) {
                 if(p.color != this.color) p.sonar(p.currentPos, pos, currentBoard);
             }
         }
 
-        if(kingsEight.get(newPos).booleanValue()){
+        if(currentBoard.kingsEight.get(newPos).booleanValue()){
             return true;
         } else {
             return false;
@@ -264,27 +264,12 @@ public class King extends Piece{
 
     @Override
     public void sonar(String currentPos, String newPos, Board currentBoard) {
-        for (String pos : kingsEight.keySet()) {
-            Integer sqpos = positionResolver(pos);
-            Integer curPos = positionResolver(currentPos);
-            possibleMoves(curPos,sqpos);
-            allowedMoves(sqpos,currentBoard);
-        }
+
     }
 
     @Override
     public void updateKingHash(ArrayList<Integer> allowedMoves) {
-        String tempPos = new String();
-        for (Integer x: allowedMoves) {
-            tempPos = xIDResolver(x);
-            if(kingsEight.containsKey(tempPos)){
-                kingsEight.replace(tempPos,false);
-            }
 
-            if(kingsPos.containsKey(tempPos)){
-                kingsPos.replace(tempPos,false);
-            }
-        }
 
     }
 

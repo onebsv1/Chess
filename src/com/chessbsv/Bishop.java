@@ -287,7 +287,7 @@ public class Bishop extends Piece {
         possibleMovesDiagonal3.clear();
         possibleMovesDiagonal4.clear();
 
-        updateKingHash(allowedMoves);
+        updateKingHash(allowedMoves,currentBoard);
 
         allowedMovesDiagonal1.clear();
         allowedMovesDiagonal2.clear();
@@ -314,23 +314,23 @@ public class Bishop extends Piece {
 
     }
 
-    public void updateKingHash(ArrayList<Integer> allowedMoves){
+    public void updateKingHash(ArrayList<Integer> allowedMoves,Board currentBoard){
         String tempPos = new String();
         for (Integer x: allowedMoves) {
             tempPos = xIDResolver(x);
-            if(kingsEight.containsKey(tempPos)){
-                kingsEight.replace(tempPos,false);
+            if(currentBoard.kingsEight.containsKey(tempPos)){
+                currentBoard.kingsEight.replace(tempPos,false);
             }
 
-            if(kingsPos.containsKey(tempPos)){
-                kingsPos.replace(tempPos,false);
+            if(currentBoard.kingsPos.containsKey(tempPos)){
+                currentBoard.kingsPos.replace(tempPos,false);
             }
         }
     }
 
     public void sonar(String currentPos, String newPos, Board currentBoard){
 
-        for (String pos : kingsEight.keySet()) {
+        for (String pos : currentBoard.kingsEight.keySet()) {
             Integer sqpos = positionResolver(pos);
             Integer curPos = positionResolver(currentPos);
             possibleMoves(curPos,sqpos);
