@@ -27,7 +27,6 @@ public class Queen extends Piece {
     ArrayList<Integer> allowedMovesRight = new ArrayList<>();
     ArrayList<Integer> allowedMovesBottom = new ArrayList<>();
     ArrayList<Integer> allowedMoves = new ArrayList<>();
-    ArrayList<Integer> allowedMovesQueen = new ArrayList<>();
 
     HashSet<Integer> topLeft = new HashSet<>();
     HashSet<Integer> topRight = new HashSet<>();
@@ -56,7 +55,7 @@ public class Queen extends Piece {
         Integer cPos = this.positionResolver(curPos);
         Integer newPos = this.positionResolver(newPosition);
 
-        Piece.three_state blk = Piece.three_state.NEITHER;
+        three_state blk = Piece.three_state.NEITHER;
 
         boolean moveStatus = possibleMoves(cPos,newPos);
         if (moveStatus) {
@@ -212,7 +211,7 @@ public class Queen extends Piece {
     }
 
     @Override
-    public boolean allowedMoves(Integer newPosition, Board currentBoard, Piece.three_state blk) {
+    public boolean allowedMoves(Integer newPosition, Board currentBoard, three_state blk) {
         /*
         find position occupied by pieces in the diagonal array and move there
         if same color found, move to that (square-1)
@@ -413,28 +412,28 @@ public class Queen extends Piece {
         }
 
         for (int j = 0; j < allowedMovesLeft.size(); j++) {
-            allowedMovesQueen.add(allowedMovesLeft.get(j));
+            allowedMoves.add(allowedMovesLeft.get(j));
             if (newPosition == allowedMovesLeft.get(j)) {
                 allowedMoveStatus = true;
             }
         }
 
         for (int j = 0; j < allowedMovesTop.size(); j++) {
-            allowedMovesQueen.add(allowedMovesTop.get(j));
+            allowedMoves.add(allowedMovesTop.get(j));
             if (newPosition == allowedMovesTop.get(j)) {
                 allowedMoveStatus = true;
             }
         }
 
         for (int j = 0; j < allowedMovesRight.size(); j++) {
-            allowedMovesQueen.add(allowedMovesRight.get(j));
+            allowedMoves.add(allowedMovesRight.get(j));
             if (newPosition == allowedMovesRight.get(j)) {
                 allowedMoveStatus = true;
             }
         }
 
         for (int j = 0; j < allowedMovesBottom.size(); j++) {
-            allowedMovesQueen.add(allowedMovesBottom.get(j));
+            allowedMoves.add(allowedMovesBottom.get(j));
             if (newPosition == allowedMovesBottom.get(j)) {
                 allowedMoveStatus = true;
             }
@@ -461,8 +460,14 @@ public class Queen extends Piece {
         allowedMovesRight.clear();
         allowedMovesBottom.clear();
 
+        if(blk == three_state.BLACK){
+            updateBlkKingHash(allowedMoves,currentBoard);
+        } else if(blk == three_state.WHITE){
+            updateWhtKingHash(allowedMoves,currentBoard);
+        } else {
+        }
+
         allowedMoves.clear();
-        allowedMovesQueen.clear();
 
         return allowedMoveStatus;
 
@@ -484,23 +489,89 @@ public class Queen extends Piece {
     }
 
 
+    // ########################## whtSonar <-> blkKingHashes ##########################
+
     @Override
-    public void whtSonar(String currentPos, Board currentBoard) {
+    public void updateBlkKingHash(ArrayList<Integer> allowedMoves,Board currentBoard){
+        String tempPos = new String();
+        for (Integer x: allowedMoves) {
+            tempPos = xIDResolver(x);
+            if(currentBoard.blkKingsEight.containsKey(tempPos)){
+                System.out.println("Calling white king edits blkKingsEight");
+                currentBoard.blkKingsEight.replace(tempPos,false);
+            }
+
+            if(currentBoard.blkKingsPos.containsKey(tempPos)){
+                System.out.println("Calling white king edits blkKingsPos");
+                currentBoard.blkKingsPos.replace(tempPos,false);
+            }
+        }
+    }
+
+    @Override
+    public void whtSonar(String currentPos, Board currentBoard){
+
+        three_state blk = three_state.BLACK;
+
+        for (String pos : currentBoard.blkKingsEight.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            System.out.println("Calling white king's moves"+pos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
+
+        for (String pos : currentBoard.blkKingsPos.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            System.out.println("Calling white king's moves"+pos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
 
     }
+
+    // ########################## blkSonar <-> whtKingHashes ##########################
+
 
     @Override
     public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
+        String tempPos = new String();
+        for (Integer x: allowedMoves) {
+            tempPos = xIDResolver(x);
+            if(currentBoard.whtKingsEight.containsKey(tempPos)){
+                //System.out.println("Calling black kings edits KingsHash");
+                currentBoard.whtKingsEight.replace(tempPos,false);
+            }
+
+            if(currentBoard.whtKingsPos.containsKey(tempPos)){
+                //System.out.println("Calling black kings edit KingsPos");
+                currentBoard.whtKingsPos.replace(tempPos,false);
+            }
+        }
 
     }
+
 
     @Override
     public void blkSonar(String currentPos, Board currentBoard) {
+        three_state blk = three_state.WHITE;
 
-    }
+        for (String pos : currentBoard.whtKingsEight.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            //System.out.println("Calling black kings moves"+pos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
 
-    @Override
-    public void updateBlkKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
+        for (String pos : currentBoard.whtKingsPos.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            //System.out.println("Calling black kings moves"+pos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
 
     }
 

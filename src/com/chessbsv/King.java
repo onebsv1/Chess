@@ -375,10 +375,6 @@ public class King extends Piece{
 
         return flag;
     }
-    
-    public void checkCondition(){
-        //set some flag in Board to move only this piece
-    }
 
     private void loadWhtKingHash(HashMap<String, Boolean> whtKingsEight, HashMap<String, Boolean> whtKingsPos) {
 
