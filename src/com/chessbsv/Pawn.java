@@ -45,7 +45,7 @@ public class Pawn extends Piece {
         Integer cPos = this.positionResolver(currPos);
         Integer newPos = this.positionResolver(newPosition);
 
-
+        three_state blk = three_state.NEITHER;
 
         boolean moveStatus = possibleMoves(cPos,newPos);
         if (moveStatus) {
@@ -248,9 +248,10 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public void whtSonar(String currentPos, String newPos, Board currentBoard) {
+    public void whtSonar(String currentPos, Board currentBoard) {
 
     }
+
 
     @Override
     public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
@@ -258,9 +259,10 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public void blkSonar(String currentPos, String newPos, Board currentBoard) {
+    public void blkSonar(String currentPos, Board currentBoard) {
 
     }
+
 
     @Override
     public void updateBlkKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {

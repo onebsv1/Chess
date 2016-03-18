@@ -36,6 +36,8 @@ public class Knight extends Piece{
         Integer newPos = this.positionResolver(newPosition);
         boolean moveStatus = possibleMoves(cPos,newPos);
 
+        three_state blk = three_state.NEITHER;
+
 
         if(!moveStatus){
             System.out.println("Not a vaild position, try again.");
@@ -233,9 +235,10 @@ public class Knight extends Piece{
     }
 
     @Override
-    public void whtSonar(String currentPos, String newPos, Board currentBoard) {
+    public void whtSonar(String currentPos, Board currentBoard) {
 
     }
+
 
     @Override
     public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
@@ -243,9 +246,10 @@ public class Knight extends Piece{
     }
 
     @Override
-    public void blkSonar(String currentPos, String newPos, Board currentBoard) {
+    public void blkSonar(String currentPos, Board currentBoard) {
 
     }
+
 
     @Override
     public void updateBlkKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
@@ -255,13 +259,6 @@ public class Knight extends Piece{
     public void updateKingHash(ArrayList<Integer> allowedMoves){
 
     }
-
-    public void sonar(String currentPos, String newPos, Board currentBoard){
-
-
-
-    }
-
 
     @Override
     public String toString() {

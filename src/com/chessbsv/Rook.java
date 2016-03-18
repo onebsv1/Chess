@@ -46,6 +46,7 @@ public class Rook extends Piece {
         Integer newPos = this.positionResolver(newPosition);
         boolean moveStatus = possibleMoves(cPos,newPos);
 
+        three_state blk = three_state.NEITHER;
 
 
         if (moveStatus) {
@@ -290,7 +291,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public void whtSonar(String currentPos, String newPos, Board currentBoard) {
+    public void whtSonar(String currentPos, Board currentBoard) {
 
     }
 
@@ -300,7 +301,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public void blkSonar(String currentPos, String newPos, Board currentBoard) {
+    public void blkSonar(String currentPos, Board currentBoard) {
 
     }
 

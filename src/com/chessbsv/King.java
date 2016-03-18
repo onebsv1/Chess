@@ -399,11 +399,10 @@ public class King extends Piece{
     }
 
     @Override
-    public void whtSonar(String currentPos, String newPos, Board currentBoard) {
-
-        return;
+    public void whtSonar(String currentPos, Board currentBoard) {
 
     }
+
 
     @Override
     public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard ) {
@@ -413,8 +412,8 @@ public class King extends Piece{
     }
 
     @Override
-    public void blkSonar(String currentPos, String newPos, Board currentBoard) {
-        
+    public void blkSonar(String currentPos, Board currentBoard) {
+
     }
 
     @Override
