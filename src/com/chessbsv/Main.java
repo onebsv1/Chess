@@ -25,8 +25,14 @@ public class Main {
                     King whtKing = (King) board.positionPieceAssoc.get(board.xIDPositionAssoc.get("KiW1"));
                     whtKing.checkEight(board);
 
+                    if(whtKing.currentPos.equals("DEAD")){
+                        System.out.println("Game over, player 2 wins: "+gameOver);
+                        gameOver=true;
+                        break;
+                    }
+
                     if(!whtKing.checkForMate(board)){
-                        System.out.println("Game over: "+gameOver);
+                        System.out.println("Game over, player 2 wins: "+gameOver);
                         gameOver=true;
                         break;
                     }
@@ -35,22 +41,22 @@ public class Main {
 
                     if(!whtKing.checkForCheck(board)){
                         while (!moveStatus) {
+                            board.drawBoard();
                             System.out.println("White king is Under Check: ");
-                            System.out.println("Enter next position: ");
+                            System.out.println("Player1 Enter next position: ");
                             String nextPostion = sc.next();
                             moveStatus = whtKing.dispMove(nextPostion, board);
-                            board.drawBoard();
                         }
 
                     }
 
-                    System.out.println("Enter Piece: ");
+                    board.drawBoard();
+                    System.out.println("Player1 Enter Piece: ");
                     String nextPiece = sc.next();
-                    System.out.println("Enter next position: ");
+                    System.out.println("Player1 Enter next position: ");
                     String nextPostion = sc.next();
                     Piece px = board.positionPieceAssoc.get(board.xIDPositionAssoc.get(nextPiece));
                     moveStatus = px.dispMove(nextPostion, board);
-                    board.drawBoard();
                 }
 
 
@@ -60,31 +66,36 @@ public class Main {
                     King blkKing = (King) board.positionPieceAssoc.get(board.xIDPositionAssoc.get("KiB1"));
                     blkKing.checkEight(board);
 
+                    if(blkKing.currentPos.equals("DEAD")){
+                        System.out.println("Game over, player 1 wins: "+gameOver);
+                        gameOver=true;
+                        break;
+                    }
+
                     if(!blkKing.checkForMate(board)){
-                        System.out.println("Game over: "+gameOver);
+                        System.out.println("Game over, player 1 wins: "+gameOver);
                         gameOver=true;
                         break;
                     }
 
                     if(!blkKing.checkForCheck(board)) {
                         while(!moveStatus) {
+                            board.drawBoard();
                             System.out.println("Black king is Under Check: ");
-                            System.out.println("Enter next position: ");
+                            System.out.println("Player2 Enter next position: ");
                             String nextPostion = sc.next();
                             moveStatus = blkKing.dispMove(nextPostion, board);
-                            board.drawBoard();
                         }
                     }
 
 
-
-                    System.out.println("Enter Piece: ");
+                    board.drawBoard();
+                    System.out.println("Player2 Enter Piece: ");
                     String nextPiece = sc.next();
-                    System.out.println("Enter next position: ");
+                    System.out.println("Player2 Enter next position: ");
                     String nextPostion = sc.next();
                     Piece px = board.positionPieceAssoc.get(board.xIDPositionAssoc.get(nextPiece));
                     moveStatus = px.dispMove(nextPostion, board);
-                    board.drawBoard();
 
                 }
 
