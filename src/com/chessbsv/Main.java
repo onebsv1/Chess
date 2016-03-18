@@ -53,6 +53,7 @@ public class Main {
                             String nextPostion = sc.next();
                             moveStatus = whtKing.dispMove(nextPostion, board);
                         }
+                        break;
 
                     }
 
@@ -101,6 +102,7 @@ public class Main {
                             String nextPostion = sc.next();
                             moveStatus = blkKing.dispMove(nextPostion, board);
                         }
+                        break;
                     }
 
 
@@ -129,7 +131,7 @@ public class Main {
         //the pieces onto the board.
 
         Bishop b1 = new Bishop("BW1", "D4", Piece.piece_color.WHITE, Piece.piece_type.BISHOP);
-        Rook r1 = new Rook("RB1", "H4", Piece.piece_color.BLACK, Piece.piece_type.ROOK);
+        Rook r1 = new Rook("RB1", "H4", Piece.piece_color.WHITE, Piece.piece_type.ROOK);
         Knight k1 = new Knight("KB1", "D1", Piece.piece_color.BLACK, Piece.piece_type.KNIGHT);
         Pawn p1 = new Pawn("PW1", "F6", Piece.piece_color.WHITE, Piece.piece_type.PAWN);
         Pawn p2 = new Pawn("PB1", "A2", Piece.piece_color.BLACK, Piece.piece_type.PAWN);
