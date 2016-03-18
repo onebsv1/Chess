@@ -18,15 +18,19 @@ public class Main {
             while(!gameOver) {
                 board.resurrectPiece();
 
+                System.out.println("Player1 (white)'s move: ");
                 moveStatus = false;
                 while(!moveStatus) {
                     King whtKing = (King) board.positionPieceAssoc.get(board.xIDPositionAssoc.get("KiW1"));
                     whtKing.checkEight(board);
-                    if(whtKing.checkForMate(board)){
+
+                    if(!whtKing.checkForMate(board)){
                         gameOver=true;
                     }
 
-                    if(whtKing.checkForCheck(board)){
+                    System.out.println("Game over: "+gameOver);
+
+                    if(!whtKing.checkForCheck(board)){
                         System.out.println("White king is Under Check: ");
                         System.out.println("Enter next position: ");
                         String nextPostion = sc.next();
@@ -45,15 +49,16 @@ public class Main {
                     }
                 }
 
+                System.out.println("Player2 (blk)'s move: ");
                 moveStatus = false;
                 while(!moveStatus) {
                     King blkKing = (King) board.positionPieceAssoc.get(board.xIDPositionAssoc.get("KiB1"));
                     blkKing.checkEight(board);
-                    if(blkKing.checkForMate(board)){
+                    if(!blkKing.checkForMate(board)){
                         gameOver=true;
                     }
 
-                    if(blkKing.checkForCheck(board)){
+                    if(!blkKing.checkForCheck(board)){
                         System.out.println("Black king is Under Check: ");
                         System.out.println("Enter next position: ");
                         String nextPostion = sc.next();
@@ -87,8 +92,8 @@ public class Main {
         //the pieces onto the board.
 
         Bishop b1 = new Bishop("BW1", "D4", Piece.piece_color.WHITE, Piece.piece_type.BISHOP);
-        Rook r1 = new Rook("RW1", "H1", Piece.piece_color.WHITE, Piece.piece_type.ROOK);
-        Knight k1 = new Knight("KB1", "H5", Piece.piece_color.BLACK, Piece.piece_type.KNIGHT);
+        Rook r1 = new Rook("RB1", "H4", Piece.piece_color.BLACK, Piece.piece_type.ROOK);
+        Knight k1 = new Knight("KB1", "D1", Piece.piece_color.BLACK, Piece.piece_type.KNIGHT);
         Pawn p1 = new Pawn("PW1", "F6", Piece.piece_color.WHITE, Piece.piece_type.PAWN);
         Pawn p2 = new Pawn("PB1", "A2", Piece.piece_color.BLACK, Piece.piece_type.PAWN);
         Pawn p3 = new Pawn("PB2", "G1", Piece.piece_color.BLACK, Piece.piece_type.PAWN);

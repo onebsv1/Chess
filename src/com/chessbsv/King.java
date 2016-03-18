@@ -2,6 +2,7 @@ package com.chessbsv;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -271,8 +272,23 @@ public class King extends Piece{
 
             loadWhtKingHash(currentBoard.whtKingsEight, currentBoard.whtKingsPos);
 
+            /*System.out.println("Kings Hashes");
+
+            for ( Map.Entry<String, Boolean> entry : currentBoard.whtKingsEight.entrySet()) {
+                String key = entry.getKey();
+                boolean val = entry.getValue();
+                System.out.println("Key: "+key+" Value: "+val);
+            }*/
+
+
+            //System.out.println("Pieces that are being sonared: ");
+
             for (Piece p : currentBoard.positionPieceAssoc.values()) {
-                if (p.color != this.color) p.blkSonar(p.currentPos, currentBoard);
+
+                if (p.color != this.color) {
+                    System.out.println(p);
+                    p.blkSonar(p.currentPos, currentBoard);
+                }
             }
 
         } else if (this.color.equals(piece_color.BLACK)){
@@ -289,12 +305,13 @@ public class King extends Piece{
 
     public boolean checkForCheck(Board currentBoard){
 
-        Boolean flag;
+        Boolean flag = false;
 
         if(this.color == piece_color.BLACK) {
-            flag = currentBoard.blkKingsPos.get(this.currentPos);
+            flag = flag | currentBoard.blkKingsPos.get(this.currentPos);
         } else {
-            flag = currentBoard.whtKingsPos.get(this.currentPos);
+            System.out.println("Check condition: "+(flag | currentBoard.whtKingsPos.get(this.currentPos)));
+            flag = flag | currentBoard.whtKingsPos.get(this.currentPos);
         }
 
         return flag;
@@ -312,9 +329,12 @@ public class King extends Piece{
         } else {
             flag = currentBoard.whtKingsPos.get(this.currentPos);
             for (boolean b : currentBoard.whtKingsEight.values()){
+                System.out.println("Check Mate condition: "+(flag|b));
                 flag = flag | b;
             }
         }
+
+
 
         return flag;
     }
@@ -403,21 +423,52 @@ public class King extends Piece{
 
     }
 
-
     @Override
-    public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard ) {
-
-        return;
+    public void updateBlkKingHash(ArrayList<Integer> allowedMoves,Board currentBoard) {
 
     }
+
+    // ########################## blkSonar <-> whtKingHashes ##########################
+
+
+    @Override
+    public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
+        String tempPos = new String();
+        for (Integer x: allowedMoves) {
+            tempPos = xIDResolver(x);
+            if(currentBoard.whtKingsEight.containsKey(tempPos)){
+                System.out.println("Calling black kings edits KingsHash");
+                currentBoard.whtKingsEight.replace(tempPos,false);
+            }
+
+            if(currentBoard.whtKingsPos.containsKey(tempPos)){
+                System.out.println("Calling black kings edit KingsPos");
+                currentBoard.whtKingsPos.replace(tempPos,false);
+            }
+        }
+
+    }
+
 
     @Override
     public void blkSonar(String currentPos, Board currentBoard) {
+        three_state blk = three_state.WHITE;
 
-    }
+        for (String pos : currentBoard.whtKingsEight.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            System.out.println("Calling black kings moves"+pos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
 
-    @Override
-    public void updateBlkKingHash(ArrayList<Integer> allowedMoves,Board currentBoard) {
+        for (String pos : currentBoard.whtKingsPos.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            System.out.println("Calling black kings moves"+pos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
 
     }
 

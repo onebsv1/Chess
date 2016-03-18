@@ -224,6 +224,15 @@ public class Pawn extends Piece {
 
 
         possibleMoves.clear();
+
+        if(blk == three_state.BLACK){
+            updateBlkKingHash(allowedMoves,currentBoard);
+        } else if(blk == three_state.WHITE){
+            updateWhtKingHash(allowedMoves,currentBoard);
+        } else {
+        }
+
+
         allowedMoves.clear();
 
         return allowedMoveStatus;
@@ -254,20 +263,54 @@ public class Pawn extends Piece {
 
 
     @Override
-    public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
-
-    }
-
-    @Override
-    public void blkSonar(String currentPos, Board currentBoard) {
-
-    }
-
-
-    @Override
     public void updateBlkKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
 
     }
+
+    // ########################## blkSonar <-> whtKingHashes ##########################
+
+
+    @Override
+    public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
+        String tempPos = new String();
+        for (Integer x: allowedMoves) {
+            tempPos = xIDResolver(x);
+            if(currentBoard.whtKingsEight.containsKey(tempPos)){
+                System.out.println("Pawn edits whtKingEight");
+                currentBoard.whtKingsEight.replace(tempPos,false);
+            }
+
+            if(currentBoard.whtKingsPos.containsKey(tempPos)){
+                System.out.println("Pawn edits whtKingPos");
+                currentBoard.whtKingsPos.replace(tempPos,false);
+            }
+        }
+
+    }
+
+
+    @Override
+    public void blkSonar(String currentPos, Board currentBoard) {
+        three_state blk = three_state.WHITE;
+
+        for (String pos : currentBoard.whtKingsEight.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            System.out.println("calling pawn A2's moves: "+currentPos+pos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
+
+        for (String pos : currentBoard.whtKingsPos.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
+
+    }
+
+
 
     @Override
     public String toString() {

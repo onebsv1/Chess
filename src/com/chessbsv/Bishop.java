@@ -381,6 +381,13 @@ public class Bishop extends Piece {
             allowedMoves(sqpos,currentBoard,blk);
         }
 
+        for (String pos : currentBoard.whtKingsPos.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
+
     }
 
 
