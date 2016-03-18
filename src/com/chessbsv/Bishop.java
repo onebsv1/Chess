@@ -355,12 +355,31 @@ public class Bishop extends Piece {
 
     @Override
     public void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
+        String tempPos = new String();
+        for (Integer x: allowedMoves) {
+            tempPos = xIDResolver(x);
+            if(currentBoard.whtKingsEight.containsKey(tempPos)){
+                currentBoard.whtKingsEight.replace(tempPos,false);
+            }
+
+            if(currentBoard.whtKingsPos.containsKey(tempPos)){
+                currentBoard.whtKingsPos.replace(tempPos,false);
+            }
+        }
 
     }
 
 
     @Override
     public void blkSonar(String currentPos, Board currentBoard) {
+        three_state blk = three_state.WHITE;
+
+        for (String pos : currentBoard.whtKingsEight.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
 
     }
 
