@@ -236,9 +236,7 @@ public class King extends Piece{
             loadWhtKingHash(currentBoard.whtKingsEight, currentBoard.whtKingsPos);
 
             for (Piece p : currentBoard.positionPieceAssoc.values()) {
-                for (String pos : currentBoard.whtKingsEight.keySet()) {
-                    if (p.color != this.color) p.blkSonar(p.currentPos, pos, currentBoard);
-                }
+                if (p.color != this.color) p.blkSonar(p.currentPos, currentBoard);
             }
 
             if (currentBoard.whtKingsEight.get(newPos).booleanValue()) {
@@ -251,9 +249,7 @@ public class King extends Piece{
             loadBlkKingHash(currentBoard.blkKingsEight, currentBoard.blkKingsPos);
 
             for (Piece p : currentBoard.positionPieceAssoc.values()) {
-                for (String pos : currentBoard.blkKingsEight.keySet()) {
-                    if (p.color != this.color) p.whtSonar(p.currentPos, pos, currentBoard);
-                }
+                    if (p.color != this.color) p.whtSonar(p.currentPos, currentBoard);
             }
 
             if (currentBoard.blkKingsEight.get(newPos).booleanValue()) {
@@ -268,12 +264,59 @@ public class King extends Piece{
         return false;
     }
 
+
+    public void checkEight(Board currentBoard){
+
+        if(this.color.equals(piece_color.WHITE)) {
+
+            loadWhtKingHash(currentBoard.whtKingsEight, currentBoard.whtKingsPos);
+
+            for (Piece p : currentBoard.positionPieceAssoc.values()) {
+                if (p.color != this.color) p.blkSonar(p.currentPos, currentBoard);
+            }
+
+        } else if (this.color.equals(piece_color.BLACK)){
+            loadBlkKingHash(currentBoard.blkKingsEight, currentBoard.blkKingsPos);
+
+            for (Piece p : currentBoard.positionPieceAssoc.values()) {
+                if (p.color != this.color) p.whtSonar(p.currentPos, currentBoard);
+            }
+
+        }
+
+    }
+
+
     public boolean checkForCheck(Board currentBoard){
-        return false;
+
+        Boolean flag;
+
+        if(this.color == piece_color.BLACK) {
+            flag = currentBoard.blkKingsPos.get(this.currentPos);
+        } else {
+            flag = currentBoard.whtKingsPos.get(this.currentPos);
+        }
+
+        return flag;
     }
 
     public boolean checkForMate(Board currentBoard){
-        return false;
+
+        Boolean flag = false;
+
+        if(this.color == piece_color.BLACK) {
+            flag = currentBoard.blkKingsPos.get(this.currentPos);
+            for (boolean b : currentBoard.blkKingsEight.values()){
+                flag = flag | b;
+            }
+        } else {
+            flag = currentBoard.whtKingsPos.get(this.currentPos);
+            for (boolean b : currentBoard.whtKingsEight.values()){
+                flag = flag | b;
+            }
+        }
+
+        return flag;
     }
     
     public void checkCondition(){
@@ -282,28 +325,60 @@ public class King extends Piece{
 
     private void loadWhtKingHash(HashMap<String, Boolean> whtKingsEight, HashMap<String, Boolean> whtKingsPos) {
 
-        whtKingsEight.put(xIDResolver(positionResolver(currentPos)-1),true);
-        whtKingsEight.put(xIDResolver(positionResolver(currentPos)-7),true);
-        whtKingsEight.put(xIDResolver(positionResolver(currentPos)-9),true);
-        whtKingsEight.put(xIDResolver(positionResolver(currentPos)-8),true);
-        whtKingsEight.put(xIDResolver(positionResolver(currentPos)+1),true);
-        whtKingsEight.put(xIDResolver(positionResolver(currentPos)+7),true);
-        whtKingsEight.put(xIDResolver(positionResolver(currentPos)+9),true);
-        whtKingsEight.put(xIDResolver(positionResolver(currentPos)+8),true);
+        if(validPosition(positionResolver(currentPos)-1)){
+            whtKingsEight.put(xIDResolver(positionResolver(currentPos) - 1), true);
+        }
+        if(validPosition(positionResolver(currentPos)-7)){
+            whtKingsEight.put(xIDResolver(positionResolver(currentPos) - 7), true);
+        }
+        if(validPosition(positionResolver(currentPos)-9)){
+            whtKingsEight.put(xIDResolver(positionResolver(currentPos) - 9), true);
+        }
+        if(validPosition(positionResolver(currentPos)-8)){
+            whtKingsEight.put(xIDResolver(positionResolver(currentPos) - 8), true);
+        }
+        if(validPosition(positionResolver(currentPos)+1)){
+            whtKingsEight.put(xIDResolver(positionResolver(currentPos) + 1), true);
+        }
+        if(validPosition(positionResolver(currentPos)+7)){
+            whtKingsEight.put(xIDResolver(positionResolver(currentPos) + 7), true);
+        }
+        if(validPosition(positionResolver(currentPos)+9)){
+            whtKingsEight.put(xIDResolver(positionResolver(currentPos) + 9), true);
+        }
+        if(validPosition(positionResolver(currentPos)+8)){
+            whtKingsEight.put(xIDResolver(positionResolver(currentPos) + 8), true);
+        }
 
         whtKingsPos.put(currentPos,true);
     }
 
     private void loadBlkKingHash(HashMap<String, Boolean> blkKingsEight, HashMap<String, Boolean> blkKingsPos) {
 
-        blkKingsEight.put(xIDResolver(positionResolver(currentPos)-1),true);
-        blkKingsEight.put(xIDResolver(positionResolver(currentPos)-7),true);
-        blkKingsEight.put(xIDResolver(positionResolver(currentPos)-9),true);
-        blkKingsEight.put(xIDResolver(positionResolver(currentPos)-8),true);
-        blkKingsEight.put(xIDResolver(positionResolver(currentPos)+1),true);
-        blkKingsEight.put(xIDResolver(positionResolver(currentPos)+7),true);
-        blkKingsEight.put(xIDResolver(positionResolver(currentPos)+9),true);
-        blkKingsEight.put(xIDResolver(positionResolver(currentPos)+8),true);
+        if(validPosition(positionResolver(currentPos)-1)){
+            blkKingsEight.put(xIDResolver(positionResolver(currentPos) - 1), true);
+        }
+        if(validPosition(positionResolver(currentPos)-7)){
+            blkKingsEight.put(xIDResolver(positionResolver(currentPos) - 7), true);
+        }
+        if(validPosition(positionResolver(currentPos)-9)){
+            blkKingsEight.put(xIDResolver(positionResolver(currentPos) - 9), true);
+        }
+        if(validPosition(positionResolver(currentPos)-8)){
+            blkKingsEight.put(xIDResolver(positionResolver(currentPos) - 8), true);
+        }
+        if(validPosition(positionResolver(currentPos)+1)){
+            blkKingsEight.put(xIDResolver(positionResolver(currentPos) + 1), true);
+        }
+        if(validPosition(positionResolver(currentPos)+7)){
+            blkKingsEight.put(xIDResolver(positionResolver(currentPos) + 7), true);
+        }
+        if(validPosition(positionResolver(currentPos)+9)){
+            blkKingsEight.put(xIDResolver(positionResolver(currentPos) + 9), true);
+        }
+        if(validPosition(positionResolver(currentPos)+8)){
+            blkKingsEight.put(xIDResolver(positionResolver(currentPos) + 8), true);
+        }
 
         blkKingsPos.put(currentPos,true);
     }

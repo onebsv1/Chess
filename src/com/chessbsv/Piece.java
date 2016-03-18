@@ -24,9 +24,9 @@ public abstract class Piece {
     public abstract boolean possibleMoves(Integer currentPos, Integer newPosition);
     public abstract boolean allowedMoves(Integer newPosition, Board currentBoard, three_state blk);
     public abstract void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException;
-    public abstract void whtSonar(String currentPos, String newPos, Board currentBoard);
+    public abstract void whtSonar(String currentPos,Board currentBoard);
     public abstract void updateWhtKingHash(ArrayList<Integer> allowedMoves, Board currentBoard);
-    public abstract void blkSonar(String currentPos, String newPos, Board currentBoard);
+    public abstract void blkSonar(String currentPos, Board currentBoard);
     public abstract void updateBlkKingHash(ArrayList<Integer> allowedMoves, Board currentBoard);
 
     HashMap<String,Integer> alphaNum = new HashMap<>();

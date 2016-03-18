@@ -336,7 +336,7 @@ public class Bishop extends Piece {
         }
     }
 
-    public void whtSonar(String currentPos, String newPos, Board currentBoard){
+    public void whtSonar(String currentPos, Board currentBoard){
 
         three_state blk = three_state.BLACK;
 
@@ -360,7 +360,7 @@ public class Bishop extends Piece {
 
 
     @Override
-    public void blkSonar(String currentPos, String newPos, Board currentBoard) {
+    public void blkSonar(String currentPos, Board currentBoard) {
 
     }
 

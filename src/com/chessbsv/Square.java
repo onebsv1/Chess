@@ -17,35 +17,7 @@ public class Square {
     String ID = null;
 
     Piece holds = new Piece() {
-        @Override
-        public boolean dispMove(String d1, Board board) {
-        return false;
-        }
 
-        @Override
-        public boolean allowedMoves(Integer newPosition, Board currentBoard) {
-            return false;
-        }
-
-        @Override
-        public boolean possibleMoves(Integer currentPos, Integer newPosition) {
-            return false;
-        }
-
-        @Override
-        public void killFunction(String newPosition, Board currentBoard) throws IllegalArgumentException {
-
-        }
-
-        @Override
-        public void sonar(String currentPos, String newPos, Board currentBoard) {
-
-        }
-
-        @Override
-        public void updateKingHash(ArrayList<Integer> allowedMoves) {
-
-        }
 
         @Override
         public String toString() {
