@@ -20,16 +20,22 @@ public class Main {
 
 
                 moveStatus = false;
-                while(!moveStatus) {
+                while((!moveStatus) && (!gameOver)) {
                     System.out.println("Player1 (white)'s move: ");
                     King whtKing = (King) board.positionPieceAssoc.get(board.xIDPositionAssoc.get("KiW1"));
-                    whtKing.checkEight(board);
+                    if((whtKing ==null)){
+                        System.out.println("Game over, player 2 wins: "+gameOver);
+                        gameOver=true;
+                        break;
+                    }
 
                     if(whtKing.currentPos.equals("DEAD")){
                         System.out.println("Game over, player 2 wins: "+gameOver);
                         gameOver=true;
                         break;
                     }
+
+                    whtKing.checkEight(board);
 
                     if(!whtKing.checkForMate(board)){
                         System.out.println("Game over, player 2 wins: "+gameOver);
@@ -61,16 +67,25 @@ public class Main {
 
 
                 moveStatus = false;
-                while(!moveStatus) {
+                while((!moveStatus)&&(!gameOver)) {
                     System.out.println("Player2 (blk)'s move: ");
                     King blkKing = (King) board.positionPieceAssoc.get(board.xIDPositionAssoc.get("KiB1"));
-                    blkKing.checkEight(board);
+
+                    if(blkKing==null){
+                        System.out.println("Game over, player 1 wins: "+gameOver);
+                        gameOver=true;
+                        break;
+                    }
 
                     if(blkKing.currentPos.equals("DEAD")){
                         System.out.println("Game over, player 1 wins: "+gameOver);
                         gameOver=true;
                         break;
                     }
+
+                    blkKing.checkEight(board);
+
+
 
                     if(!blkKing.checkForMate(board)){
                         System.out.println("Game over, player 1 wins: "+gameOver);
