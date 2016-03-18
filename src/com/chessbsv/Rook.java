@@ -297,13 +297,45 @@ public class Rook extends Piece {
 
     }
 
-    @Override
-    public void whtSonar(String currentPos, Board currentBoard) {
+    // ########################## whtSonar <-> blkKingHashes ##########################
 
+    @Override
+    public void updateBlkKingHash(ArrayList<Integer> allowedMoves,Board currentBoard){
+        String tempPos = new String();
+        for (Integer x: allowedMoves) {
+            tempPos = xIDResolver(x);
+            if(currentBoard.blkKingsEight.containsKey(tempPos)){
+                System.out.println("Calling white rook edits blkKingsEight");
+                currentBoard.blkKingsEight.replace(tempPos,false);
+            }
+
+            if(currentBoard.blkKingsPos.containsKey(tempPos)){
+                System.out.println("Calling white rook edits blkKingsPos");
+                currentBoard.blkKingsPos.replace(tempPos,false);
+            }
+        }
     }
 
     @Override
-    public void updateBlkKingHash(ArrayList<Integer> allowedMoves, Board currentBoard) {
+    public void whtSonar(String currentPos, Board currentBoard){
+
+        three_state blk = three_state.BLACK;
+
+        for (String pos : currentBoard.blkKingsEight.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            System.out.println("Calling white rook's moves"+pos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
+
+        for (String pos : currentBoard.blkKingsPos.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            System.out.println("Calling white rook's moves"+pos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
 
     }
 

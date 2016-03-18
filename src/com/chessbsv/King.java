@@ -60,6 +60,13 @@ public class King extends Piece{
 
         boolean checkEightStatus = checkEight(newPos,currentBoard);
 
+        if(!checkEightStatus){
+            System.out.println("King is still under check! "+newPosition+checkEightStatus);
+            return (checkEightStatus);
+        } else {
+            System.out.println("King is not under check: "+newPosition);
+        }
+
         if(allowedMoveStatus){
             currentBoard.removePieces(this);
             this.currentPos = newPosition;
@@ -240,7 +247,8 @@ public class King extends Piece{
                 if (p.color != this.color) p.blkSonar(p.currentPos, currentBoard);
             }
 
-            if (currentBoard.whtKingsEight.get(newPos).booleanValue()) {
+            if (currentBoard.whtKingsEight.get(xIDResolver(newPos)).booleanValue()) {
+                System.out.println("This is allowed by Check8: "+currentBoard.whtKingsEight.get(xIDResolver(newPos)).booleanValue()+xIDResolver(newPos));
                 return true;
             } else {
                 return false;
@@ -249,11 +257,23 @@ public class King extends Piece{
         } else if (this.color.equals(piece_color.BLACK)){
             loadBlkKingHash(currentBoard.blkKingsEight, currentBoard.blkKingsPos);
 
-            for (Piece p : currentBoard.positionPieceAssoc.values()) {
-                    if (p.color != this.color) p.whtSonar(p.currentPos, currentBoard);
+            System.out.println("Kings Hashes");
+
+            for ( Map.Entry<String, Boolean> entry : currentBoard.blkKingsEight.entrySet()) {
+                String key = entry.getKey();
+                boolean val = entry.getValue();
+                System.out.println("Key: "+key+" Value: "+val);
             }
 
-            if (currentBoard.blkKingsEight.get(newPos).booleanValue()) {
+            for (Piece p : currentBoard.positionPieceAssoc.values()) {
+                    if (p.color != this.color){
+                        System.out.println(p);
+                        p.whtSonar(p.currentPos, currentBoard);
+                    }
+            }
+
+            if (currentBoard.blkKingsEight.get(xIDResolver(newPos)).booleanValue()) {
+                System.out.println("This is allowed by Check8: "+currentBoard.blkKingsEight.get(xIDResolver(newPos)).booleanValue()+xIDResolver(newPos));
                 return true;
             } else {
                 return false;
@@ -286,7 +306,7 @@ public class King extends Piece{
             for (Piece p : currentBoard.positionPieceAssoc.values()) {
 
                 if (p.color != this.color) {
-                    System.out.println(p);
+                    //System.out.println(p);
                     p.blkSonar(p.currentPos, currentBoard);
                 }
             }
@@ -294,8 +314,23 @@ public class King extends Piece{
         } else if (this.color.equals(piece_color.BLACK)){
             loadBlkKingHash(currentBoard.blkKingsEight, currentBoard.blkKingsPos);
 
+            System.out.println("Kings Hashes");
+
+            for ( Map.Entry<String, Boolean> entry : currentBoard.blkKingsEight.entrySet()) {
+                String key = entry.getKey();
+                boolean val = entry.getValue();
+                System.out.println("Key: "+key+" Value: "+val);
+            }
+
+
+            System.out.println("Pieces that are being whtSonared: ");
+
             for (Piece p : currentBoard.positionPieceAssoc.values()) {
-                if (p.color != this.color) p.whtSonar(p.currentPos, currentBoard);
+
+                if (p.color != this.color) {
+                    System.out.println(p);
+                    p.whtSonar(p.currentPos, currentBoard);
+                }
             }
 
         }
@@ -308,9 +343,10 @@ public class King extends Piece{
         Boolean flag = false;
 
         if(this.color == piece_color.BLACK) {
+            System.out.println("Check condition: "+(flag | currentBoard.blkKingsPos.get(this.currentPos)));
             flag = flag | currentBoard.blkKingsPos.get(this.currentPos);
         } else {
-            System.out.println("Check condition: "+(flag | currentBoard.whtKingsPos.get(this.currentPos)));
+            //System.out.println("Check condition: "+(flag | currentBoard.whtKingsPos.get(this.currentPos)));
             flag = flag | currentBoard.whtKingsPos.get(this.currentPos);
         }
 
@@ -324,12 +360,13 @@ public class King extends Piece{
         if(this.color == piece_color.BLACK) {
             flag = currentBoard.blkKingsPos.get(this.currentPos);
             for (boolean b : currentBoard.blkKingsEight.values()){
+                System.out.println("Check Mate condition: "+(flag|b));
                 flag = flag | b;
             }
         } else {
             flag = currentBoard.whtKingsPos.get(this.currentPos);
             for (boolean b : currentBoard.whtKingsEight.values()){
-                System.out.println("Check Mate condition: "+(flag|b));
+                //System.out.println("Check Mate condition: "+(flag|b));
                 flag = flag | b;
             }
         }
@@ -418,13 +455,45 @@ public class King extends Piece{
         }
     }
 
-    @Override
-    public void whtSonar(String currentPos, Board currentBoard) {
+    // ########################## whtSonar <-> blkKingHashes ##########################
 
+    @Override
+    public void updateBlkKingHash(ArrayList<Integer> allowedMoves,Board currentBoard){
+        String tempPos = new String();
+        for (Integer x: allowedMoves) {
+            tempPos = xIDResolver(x);
+            if(currentBoard.blkKingsEight.containsKey(tempPos)){
+                System.out.println("Calling white king edits blkKingsEight");
+                currentBoard.blkKingsEight.replace(tempPos,false);
+            }
+
+            if(currentBoard.blkKingsPos.containsKey(tempPos)){
+                System.out.println("Calling white king edits blkKingsPos");
+                currentBoard.blkKingsPos.replace(tempPos,false);
+            }
+        }
     }
 
     @Override
-    public void updateBlkKingHash(ArrayList<Integer> allowedMoves,Board currentBoard) {
+    public void whtSonar(String currentPos, Board currentBoard){
+
+        three_state blk = three_state.BLACK;
+
+        for (String pos : currentBoard.blkKingsEight.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            System.out.println("Calling white king's moves"+pos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
+
+        for (String pos : currentBoard.blkKingsPos.keySet()) {
+            Integer sqpos = positionResolver(pos);
+            Integer curPos = positionResolver(currentPos);
+            System.out.println("Calling white king's moves"+pos);
+            possibleMoves(curPos,sqpos);
+            allowedMoves(sqpos,currentBoard,blk);
+        }
 
     }
 
@@ -437,12 +506,12 @@ public class King extends Piece{
         for (Integer x: allowedMoves) {
             tempPos = xIDResolver(x);
             if(currentBoard.whtKingsEight.containsKey(tempPos)){
-                System.out.println("Calling black kings edits KingsHash");
+                //System.out.println("Calling black kings edits KingsHash");
                 currentBoard.whtKingsEight.replace(tempPos,false);
             }
 
             if(currentBoard.whtKingsPos.containsKey(tempPos)){
-                System.out.println("Calling black kings edit KingsPos");
+                //System.out.println("Calling black kings edit KingsPos");
                 currentBoard.whtKingsPos.replace(tempPos,false);
             }
         }
@@ -457,7 +526,7 @@ public class King extends Piece{
         for (String pos : currentBoard.whtKingsEight.keySet()) {
             Integer sqpos = positionResolver(pos);
             Integer curPos = positionResolver(currentPos);
-            System.out.println("Calling black kings moves"+pos);
+            //System.out.println("Calling black kings moves"+pos);
             possibleMoves(curPos,sqpos);
             allowedMoves(sqpos,currentBoard,blk);
         }
@@ -465,7 +534,7 @@ public class King extends Piece{
         for (String pos : currentBoard.whtKingsPos.keySet()) {
             Integer sqpos = positionResolver(pos);
             Integer curPos = positionResolver(currentPos);
-            System.out.println("Calling black kings moves"+pos);
+            //System.out.println("Calling black kings moves"+pos);
             possibleMoves(curPos,sqpos);
             allowedMoves(sqpos,currentBoard,blk);
         }
