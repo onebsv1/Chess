@@ -15,14 +15,14 @@ public class Main {
             populatePieces(board);
 
             while(!gameOver) {
-                board.resurrectPiece();
 
+                board.resurrectPiece();
 
                 moveStatus = false;
                 while((!moveStatus) && (!gameOver)) {
                     System.out.println("Player1 (white)'s move: ");
                     King whtKing = (King) board.positionPieceAssoc.get(board.xIDPositionAssoc.get("KiW1"));
-                    if((whtKing ==null)){
+                    if((whtKing==null)){
                         System.out.println("Game over, player 2 wins: "+gameOver);
                         gameOver=true;
                         break;
@@ -66,7 +66,6 @@ public class Main {
                     board.drawBoard();
                 }
 
-                board.resurrectPiece();
 
                 moveStatus = false;
                 while((!moveStatus)&&(!gameOver)) {
