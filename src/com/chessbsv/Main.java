@@ -13,7 +13,6 @@ public class Main {
         try {
             Board board = new Board();
             populatePieces(board);
-            board.drawBoard();
 
             while(!gameOver) {
                 board.resurrectPiece();
@@ -50,8 +49,8 @@ public class Main {
                             board.drawBoard();
                             System.out.println("White king is Under Check: ");
                             System.out.println("Player1 Enter next position: ");
-                            String nextPostion = sc.next();
-                            moveStatus = whtKing.dispMove(nextPostion, board);
+                            String nextPosition = sc.next();
+                            moveStatus = whtKing.dispMove(nextPosition, board);
                         }
                         break;
 
@@ -61,11 +60,13 @@ public class Main {
                     System.out.println("Player1 Enter Piece: ");
                     String nextPiece = sc.next();
                     System.out.println("Player1 Enter next position: ");
-                    String nextPostion = sc.next();
+                    String nextPosition = sc.next();
                     Piece px = board.positionPieceAssoc.get(board.xIDPositionAssoc.get(nextPiece));
-                    moveStatus = px.dispMove(nextPostion, board);
+                    moveStatus = px.dispMove(nextPosition, board);
+                    board.drawBoard();
                 }
 
+                board.resurrectPiece();
 
                 moveStatus = false;
                 while((!moveStatus)&&(!gameOver)) {
@@ -99,8 +100,8 @@ public class Main {
                             board.drawBoard();
                             System.out.println("Black king is Under Check: ");
                             System.out.println("Player2 Enter next position: ");
-                            String nextPostion = sc.next();
-                            moveStatus = blkKing.dispMove(nextPostion, board);
+                            String nextPosition = sc.next();
+                            moveStatus = blkKing.dispMove(nextPosition, board);
                         }
                         break;
                     }
@@ -110,9 +111,10 @@ public class Main {
                     System.out.println("Player2 Enter Piece: ");
                     String nextPiece = sc.next();
                     System.out.println("Player2 Enter next position: ");
-                    String nextPostion = sc.next();
+                    String nextPosition = sc.next();
                     Piece px = board.positionPieceAssoc.get(board.xIDPositionAssoc.get(nextPiece));
-                    moveStatus = px.dispMove(nextPostion, board);
+                    moveStatus = px.dispMove(nextPosition, board);
+                    board.drawBoard();
 
                 }
 
@@ -130,14 +132,15 @@ public class Main {
         //A function that calls the required constructors and assembles
         //the pieces onto the board.
 
-        Bishop b1 = new Bishop("BW1", "D4", Piece.piece_color.WHITE, Piece.piece_type.BISHOP);
-        Rook r1 = new Rook("RB1", "H4", Piece.piece_color.WHITE, Piece.piece_type.ROOK);
+        Bishop b1 = new Bishop("BW1", "B3", Piece.piece_color.WHITE, Piece.piece_type.BISHOP);
+        Rook r1 = new Rook("RW1", "H4", Piece.piece_color.WHITE, Piece.piece_type.ROOK);
         Knight k1 = new Knight("KB1", "D1", Piece.piece_color.BLACK, Piece.piece_type.KNIGHT);
+        Queen q1 = new Queen("QB1", "D6", Piece.piece_color.BLACK, Piece.piece_type.QUEEN);
         Pawn p1 = new Pawn("PW1", "F6", Piece.piece_color.WHITE, Piece.piece_type.PAWN);
         Pawn p2 = new Pawn("PB1", "A2", Piece.piece_color.BLACK, Piece.piece_type.PAWN);
         Pawn p3 = new Pawn("PB2", "G1", Piece.piece_color.BLACK, Piece.piece_type.PAWN);
         King whtKing = new King("KiW1","A5", Piece.piece_color.WHITE, Piece.piece_type.KING);
-        King blkKing = new King("KiB1","F5", Piece.piece_color.BLACK, Piece.piece_type.KING);
+        King blkKing = new King("KiB1","H8", Piece.piece_color.BLACK, Piece.piece_type.KING);
 
         board.populatePieces(b1);
         board.populatePieces(r1);
@@ -145,6 +148,7 @@ public class Main {
         board.populatePieces(p1);
         board.populatePieces(p2);
         board.populatePieces(p3);
+        board.populatePieces(q1);
         board.populatePieces(whtKing);
         board.populatePieces(blkKing);
 

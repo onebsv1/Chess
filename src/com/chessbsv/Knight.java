@@ -40,19 +40,19 @@ public class Knight extends Piece{
 
 
         if(!moveStatus){
-            System.out.println("Not a vaild position, try again.");
+            //System.out.println("Not a vaild position, try again.");
             return moveStatus;
         } else {
-            System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
+            //System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
         }
 
         boolean allowedMoveStatus = allowedMoves(newPos, currentBoard,blk);
 
         if(!allowedMoveStatus){
-            System.out.println("Not an allowed position, try again.");
+            //System.out.println("Not an allowed position, try again.");
             return allowedMoveStatus;
         } else {
-            System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
+            //System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
         }
 
         if(allowedMoveStatus){
@@ -75,7 +75,7 @@ public class Knight extends Piece{
         //public int populate_diagonal();
         // check diagonal entries, store aLL hashed square ids along 4 1D arrays.
         boolean validMoves = false;
-        System.out.println("Current Pos, New Pos: "+this.xIDResolver(currentPos)+" , "+this.xIDResolver(newPosition));
+        //System.out.println("Current Pos, New Pos: "+this.xIDResolver(currentPos)+" , "+this.xIDResolver(newPosition));
 
         Integer tempPos = currentPos;
 
@@ -84,7 +84,7 @@ public class Knight extends Piece{
         currentPos = currentPos -6;
         if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            System.out.println("Current pos: "+currentPos);
+            //System.out.println("Current pos: "+currentPos);
             if (newPosition == currentPos) {
                 validMoves = true;
             }
@@ -97,7 +97,7 @@ public class Knight extends Piece{
         currentPos = currentPos - 10;
         if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            System.out.println("Current pos: "+currentPos);
+            //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -110,7 +110,7 @@ public class Knight extends Piece{
         currentPos = currentPos -15;
         if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            System.out.println("Current pos: "+currentPos);
+            //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -124,7 +124,7 @@ public class Knight extends Piece{
         currentPos = currentPos -17;
         if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            System.out.println("Current pos: "+currentPos);
+            //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -134,7 +134,7 @@ public class Knight extends Piece{
         currentPos = currentPos +6;
         if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            System.out.println("Current pos: "+currentPos);
+            //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -144,7 +144,7 @@ public class Knight extends Piece{
         currentPos = currentPos +10;
         if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            System.out.println("Current pos: "+currentPos);
+            //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -154,7 +154,7 @@ public class Knight extends Piece{
         currentPos = currentPos +15;
         if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            System.out.println("Current pos: "+currentPos);
+            //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -164,7 +164,7 @@ public class Knight extends Piece{
         currentPos = currentPos +17;
         if (validPosition(currentPos)) {
             possibleMoves.add(currentPos);
-            System.out.println("Current pos: "+currentPos);
+            //System.out.println("Current pos: "+currentPos);
             if(newPosition==currentPos){
                 validMoves = true;
             }
@@ -191,12 +191,12 @@ public class Knight extends Piece{
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMoves.add(currentPosition);
-                System.out.println("Nothing: "+this.xIDResolver(currentPosition));
+                //System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMoves.add(currentPosition);
-                System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                //System.out.println("Opp: "+this.xIDResolver(currentPosition));
             } else if (tempPiece.color == this.color){
-                System.out.println("Same: "+this.xIDResolver(currentPosition));
+                //System.out.println("Same: "+this.xIDResolver(currentPosition));
             }
 
         }
@@ -249,12 +249,12 @@ public class Knight extends Piece{
         for (Integer x: allowedMoves) {
             tempPos = xIDResolver(x);
             if(currentBoard.blkKingsEight.containsKey(tempPos)){
-                System.out.println("Calling white knight edits blkKingsEight");
+                //System.out.println("Calling white knight edits blkKingsEight");
                 currentBoard.blkKingsEight.replace(tempPos,false);
             }
 
             if(currentBoard.blkKingsPos.containsKey(tempPos)){
-                System.out.println("Calling white knight edits blkKingsPos");
+                //System.out.println("Calling white knight edits blkKingsPos");
                 currentBoard.blkKingsPos.replace(tempPos,false);
             }
         }
@@ -268,7 +268,7 @@ public class Knight extends Piece{
         for (String pos : currentBoard.blkKingsEight.keySet()) {
             Integer sqpos = positionResolver(pos);
             Integer curPos = positionResolver(currentPos);
-            System.out.println("Calling white knight's moves"+pos);
+            //System.out.println("Calling white knight's moves"+pos);
             possibleMoves(curPos,sqpos);
             allowedMoves(sqpos,currentBoard,blk);
         }
@@ -276,7 +276,7 @@ public class Knight extends Piece{
         for (String pos : currentBoard.blkKingsPos.keySet()) {
             Integer sqpos = positionResolver(pos);
             Integer curPos = positionResolver(currentPos);
-            System.out.println("Calling white knight's moves"+pos);
+            //System.out.println("Calling white knight's moves"+pos);
             possibleMoves(curPos,sqpos);
             allowedMoves(sqpos,currentBoard,blk);
         }
@@ -293,12 +293,12 @@ public class Knight extends Piece{
         for (Integer x: allowedMoves) {
             tempPos = xIDResolver(x);
             if(currentBoard.whtKingsEight.containsKey(tempPos)){
-                System.out.println("calling knight edits Kingshash");
+                //System.out.println("calling knight edits Kingshash");
                 currentBoard.whtKingsEight.replace(tempPos,false);
             }
 
             if(currentBoard.whtKingsPos.containsKey(tempPos)){
-                System.out.println("calling knight edits Kingspos");
+                //System.out.println("calling knight edits Kingspos");
                 currentBoard.whtKingsPos.replace(tempPos,false);
             }
         }
@@ -313,7 +313,7 @@ public class Knight extends Piece{
         for (String pos : currentBoard.whtKingsEight.keySet()) {
             Integer sqpos = positionResolver(pos);
             Integer curPos = positionResolver(currentPos);
-            System.out.println("calling knight H5's moves: "+currentPos+pos);
+            //System.out.println("calling knight H5's moves: "+currentPos+pos);
             possibleMoves(curPos,sqpos);
             allowedMoves(sqpos,currentBoard,blk);
         }
@@ -321,7 +321,7 @@ public class Knight extends Piece{
         for (String pos : currentBoard.whtKingsPos.keySet()) {
             Integer sqpos = positionResolver(pos);
             Integer curPos = positionResolver(currentPos);
-            System.out.println("calling knight H5's moves: "+currentPos+pos);
+            //System.out.println("calling knight H5's moves: "+currentPos+pos);
             possibleMoves(curPos,sqpos);
             allowedMoves(sqpos,currentBoard,blk);
         }

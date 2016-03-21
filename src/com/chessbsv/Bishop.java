@@ -63,17 +63,17 @@ public class Bishop extends Piece {
 
         boolean moveStatus = possibleMoves(cPos,newPos);
         if (moveStatus) {
-            System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
+            //System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
         } else {
-            System.out.println("Not a vaild position, try again.");
+            //System.out.println("Not a vaild position, try again.");
             return moveStatus;
         }
 
         boolean allowedMoveStatus = allowedMoves(newPos,currentBoard,blk);
         if (allowedMoveStatus) {
-            System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
+            //System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
         } else {
-            System.out.println("Not an allowed position, try again.");
+            //System.out.println("Not an allowed position, try again.");
             return allowedMoveStatus;
         }
 
@@ -83,7 +83,7 @@ public class Bishop extends Piece {
             if(!currentBoard.xIDPositionAssoc.containsValue(newPosition)) {
                 currentBoard.populatePieces(this);
             } else {
-                System.out.println("This is a kill");
+                //System.out.println("This is a kill");
                 killFunction(newPosition,currentBoard);
                 currentBoard.populatePieces(this);
             }
@@ -98,7 +98,7 @@ public class Bishop extends Piece {
         //public int populate_diagonal();
         // check diagonal entries, store aLL hashed square ids along 4 1D arrays.
         boolean validMoves = false;
-        System.out.println("Current Pos, New Pos: "+this.xIDResolver(currentPos)+" , "+this.xIDResolver(newPosition));
+        //System.out.println("Current Pos, New Pos: "+this.xIDResolver(currentPos)+" , "+this.xIDResolver(newPosition));
 
         loadtopLeft();
         loadtopRight();
@@ -169,7 +169,7 @@ public class Bishop extends Piece {
         else if opp. color move to that square and kill the piece.
          */
 
-        System.out.println("\nTop Left: ");
+        //System.out.println("\nTop Left: ");
         for (Integer j = 0; j < possibleMovesDiagonal1.size(); j++) {
 
             Integer currentPosition = possibleMovesDiagonal1.get(j);
@@ -178,18 +178,18 @@ public class Bishop extends Piece {
 
             if(tempPiece == null){
                 allowedMovesDiagonal1.add(currentPosition);
-                System.out.println("Nothing: "+this.xIDResolver(currentPosition));
+                //System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesDiagonal1.add(currentPosition);
-                System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                //System.out.println("Opp: "+this.xIDResolver(currentPosition));
                 break;
             } else if (tempPiece.color == this.color){
-                System.out.println("Same: "+this.xIDResolver(currentPosition));
+                //System.out.println("Same: "+this.xIDResolver(currentPosition));
                 break;
             }
         }
 
-        System.out.println("\nTop Right: ");
+        //System.out.println("\nTop Right: ");
 
 
         for (Integer j = 0; j < possibleMovesDiagonal2.size(); j++) {
@@ -200,18 +200,18 @@ public class Bishop extends Piece {
 
             if(tempPiece == null){
                 allowedMovesDiagonal2.add(currentPosition);
-                System.out.println("Nothing: "+this.xIDResolver(currentPosition));
+                //System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesDiagonal2.add(currentPosition);
-                System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                //System.out.println("Opp: "+this.xIDResolver(currentPosition));
                 break;
             } else if (tempPiece.color == this.color){
-                System.out.println("Same: "+this.xIDResolver(currentPosition));
+                //System.out.println("Same: "+this.xIDResolver(currentPosition));
                 break;
             }
         }
 
-        System.out.println("\nBottom Right: ");
+        //System.out.println("\nBottom Right: ");
 
         for (Integer j = 0; j < possibleMovesDiagonal3.size(); j++) {
 
@@ -221,18 +221,18 @@ public class Bishop extends Piece {
 
             if(tempPiece == null){
                 allowedMovesDiagonal3.add(currentPosition);
-                System.out.println("Nothing: "+this.xIDResolver(currentPosition));
+                //System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesDiagonal3.add(currentPosition);
-                System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                //System.out.println("Opp: "+this.xIDResolver(currentPosition));
                 break;
             } else if (tempPiece.color == this.color){
-                System.out.println("Same: "+this.xIDResolver(currentPosition));
+                //System.out.println("Same: "+this.xIDResolver(currentPosition));
                 break;
             }
         }
 
-        System.out.println("\nBottom Left: ");
+        //System.out.println("\nBottom Left: ");
 
         for (Integer j = 0; j < possibleMovesDiagonal4.size(); j++) {
 
@@ -242,13 +242,13 @@ public class Bishop extends Piece {
 
             if(tempPiece == null){
                 allowedMovesDiagonal4.add(currentPosition);
-                System.out.println("Nothing: "+this.xIDResolver(currentPosition));
+                //System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesDiagonal4.add(currentPosition);
-                System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                //System.out.println("Opp: "+this.xIDResolver(currentPosition));
                 break;
             } else if (tempPiece.color == this.color){
-                System.out.println("Same: "+this.xIDResolver(currentPosition));
+                //System.out.println("Same: "+this.xIDResolver(currentPosition));
                 break;
             }
         }
@@ -328,12 +328,12 @@ public class Bishop extends Piece {
             String tempPos = new String();
             tempPos = xIDResolver(x);
             if(currentBoard.blkKingsEight.containsKey(tempPos)){
-                System.out.println("Calling white bishop edits blkKingsEight"+tempPos);
+                //System.out.println("Calling white bishop edits blkKingsEight"+tempPos);
                 currentBoard.blkKingsEight.replace(tempPos,false);
             }
 
             if(currentBoard.blkKingsPos.containsKey(tempPos)){
-                System.out.println("Calling white bishop edits blkKingsPos"+tempPos);
+                //System.out.println("Calling white bishop edits blkKingsPos"+tempPos);
                 currentBoard.blkKingsPos.replace(tempPos,false);
             }
         }
@@ -347,7 +347,7 @@ public class Bishop extends Piece {
         for (String pos : currentBoard.blkKingsEight.keySet()) {
             Integer sqpos = positionResolver(pos);
             Integer curPos = positionResolver(currentPos);
-            System.out.println("Calling white bishop's moves"+pos);
+            //System.out.println("Calling white bishop's moves"+pos);
             possibleMoves(curPos,sqpos);
             allowedMoves(sqpos,currentBoard,blk);
         }
@@ -355,7 +355,7 @@ public class Bishop extends Piece {
         for (String pos : currentBoard.blkKingsPos.keySet()) {
             Integer sqpos = positionResolver(pos);
             Integer curPos = positionResolver(currentPos);
-            System.out.println("Calling white bishop's moves"+pos);
+            //System.out.println("Calling white bishop's moves"+pos);
             possibleMoves(curPos,sqpos);
             allowedMoves(sqpos,currentBoard,blk);
         }

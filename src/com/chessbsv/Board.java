@@ -57,7 +57,7 @@ public class Board extends Square{
             if(positionPieceAssoc.get(currentPos) != null) {
                 if (positionPieceAssoc.get(currentPos).type == Piece.piece_type.PAWN) {
                     Pawn sub = (Pawn) positionPieceAssoc.get(currentPos);
-                    System.out.println("Pawn found!"+currentPos);
+                    //System.out.println("Pawn found!"+currentPos);
                     if(!sub.leaveMeAlone) {
                         this.offerSubstitution(sub);
                         return;
@@ -71,7 +71,7 @@ public class Board extends Square{
             if(positionPieceAssoc.get(currentPos) != null) {
                 if (positionPieceAssoc.get(currentPos).type == Piece.piece_type.PAWN) {
                     Pawn sub = (Pawn) positionPieceAssoc.get(currentPos);
-                    System.out.println("Pawn found!"+currentPos);
+                    //System.out.println("Pawn found!"+currentPos);
                     if(!sub.leaveMeAlone) {
                         this.offerSubstitution(sub);
                         return;
@@ -201,10 +201,65 @@ public class Board extends Square{
         //This function draws the chess board.
         //The first variable that it prints is the color of the square,
         //next is the xID of the piece that sits on it.
+        String holds0 = new String();
+        if(squares.get(0).holds.xID == null){
+            holds0 = "   ";
+        } else {
+            holds0 = squares.get(0).holds.xID;
+        }
+
+        String holds1 = new String();
+        if(squares.get(1).holds.xID == null){
+            holds1 = "   ";
+        } else {
+            holds1 = squares.get(1).holds.xID;
+        }
+
+        String holds2 = new String();
+        if(squares.get(2).holds.xID == null){
+            holds2 = "   ";
+        } else {
+            holds2 = squares.get(2).holds.xID;
+        }
+
+        String holds3 = new String();
+        if(squares.get(3).holds.xID == null){
+            holds3 = "   ";
+        } else {
+            holds3 = squares.get(3).holds.xID;
+        }
+
+        String holds4 = new String();
+        if(squares.get(4).holds.xID == null){
+            holds4 = "   ";
+        } else {
+            holds4 = squares.get(4).holds.xID;
+        }
+
+        String holds5 = new String();
+        if(squares.get(5).holds.xID == null){
+            holds5 = "   ";
+        } else {
+            holds5 = squares.get(5).holds.xID;
+        }
+
+        String holds6 = new String();
+        if(squares.get(6).holds.xID == null){
+            holds6 = "   ";
+        } else {
+            holds6 = squares.get(6).holds.xID;
+        }
+
+        String holds7 = new String();
+        if(squares.get(7).holds.xID == null){
+            holds7 = "   ";
+        } else {
+            holds7 = squares.get(7).holds.xID;
+        }
 
         StringBuffer buf = new StringBuffer();
         //buf.append("  ----     ----     ----     ----     ----     ----     ----     ----  \n");
-        buf.append(squares.get(0).ID+" |"+squares.get(0).color+squares.get(0).holds.xID+"| |"+squares.get(1).color+squares.get(1).holds.xID+"| |"+squares.get(2).color+squares.get(2).holds.xID+"| |"+squares.get(3).color+squares.get(3).holds.xID+"| |"+squares.get(4).color+squares.get(4).holds.xID+"| |"+squares.get(5).color+squares.get(5).holds.xID+"| |"+squares.get(6).color+squares.get(6).holds.xID+"| |"+squares.get(7).color+squares.get(7).holds.xID+"| \n");
+        buf.append(squares.get(0).ID+" |"+squares.get(0).color+holds0+"| |"+squares.get(1).color+holds1+"| |"+squares.get(2).color+holds2+"| |"+squares.get(3).color+holds3+"| |"+squares.get(4).color+holds4+"| |"+squares.get(5).color+holds5+"| |"+squares.get(6).color+holds6+"| |"+squares.get(7).color+holds7+"| \n");
         //buf.append("  ----     ----     ----     ----     ----     ----     ----     ----  \n");
         return buf.toString();
     }
@@ -215,7 +270,7 @@ public class Board extends Square{
         //It first calls spawnSquares() , in order to spawn an entire row.
         //Then it calls Draw() to display the entire row, it does this 8 times.
         //toggle, when unset will result in a row starting with a white square.
-
+        System.out.println("    1      2      3      4      5      6      7      8");
         for (int i = 0; i < 8; i++) {
             spawnSquares(toggle,i);
             System.out.print(Draw());

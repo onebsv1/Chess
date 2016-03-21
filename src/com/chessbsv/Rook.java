@@ -50,18 +50,18 @@ public class Rook extends Piece {
 
 
         if (moveStatus) {
-            System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
+            //System.out.println("This is a vaild move: "+this.type+" to "+newPosition);
         } else {
-            System.out.println("Not a vaild position, try again.");
+            //System.out.println("Not a vaild position, try again.");
             return moveStatus;
         }
 
         boolean allowedMoveStatus = allowedMoves(newPos,currentBoard,blk);
 
         if (allowedMoveStatus) {
-            System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
+            //System.out.println("This is an allowed move: "+this.type+" to "+newPosition);
         } else {
-            System.out.println("Not an allowed position, try again.");
+            //System.out.println("Not an allowed position, try again.");
             return allowedMoveStatus;
         }
 
@@ -71,7 +71,7 @@ public class Rook extends Piece {
             if(!currentBoard.xIDPositionAssoc.containsValue(newPosition)) {
                 currentBoard.populatePieces(this);
             } else {
-                System.out.println("This is a kill");
+                //System.out.println("This is a kill");
                 killFunction(newPosition,currentBoard);
                 currentBoard.populatePieces(this);
             }
@@ -83,7 +83,7 @@ public class Rook extends Piece {
 
     public boolean possibleMoves(Integer currentPos, Integer newPosition){
         boolean validMoves = false;
-        System.out.println("Current Pos, New Pos: "+this.xIDResolver(currentPos)+" , "+this.xIDResolver(newPosition));
+        //System.out.println("Current Pos, New Pos: "+this.xIDResolver(currentPos)+" , "+this.xIDResolver(newPosition));
 
         loadLeftRight();
         loadTopBottom();
@@ -148,26 +148,26 @@ public class Rook extends Piece {
         else if opp. color move to that square and kill the piece.
          */
 
-        System.out.println("\nLeft: ");
+        //System.out.println("\nLeft: ");
         for (Integer i = 0; i < possibleMovesLeft.size(); i++) {
             Integer currentPosition = possibleMovesLeft.get(i);
             String exID = this.xIDResolver(currentPosition);
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesLeft.add(currentPosition);
-                System.out.println("Nothing: "+this.xIDResolver(currentPosition));
+                //System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesLeft.add(currentPosition);
-                System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                //System.out.println("Opp: "+this.xIDResolver(currentPosition));
                 break;
             } else if (tempPiece.color == this.color){
-                System.out.println("Same: "+this.xIDResolver(currentPosition));
+                //System.out.println("Same: "+this.xIDResolver(currentPosition));
                 break;
             }
 
         }
 
-        System.out.println("\nTop: ");
+        //System.out.println("\nTop: ");
 
         for (Integer i = 0; i < possibleMovesTop.size(); i++) {
             Integer currentPosition = possibleMovesTop.get(i);
@@ -175,19 +175,19 @@ public class Rook extends Piece {
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesTop.add(currentPosition);
-                System.out.println("Nothing: "+this.xIDResolver(currentPosition));
+                //System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesTop.add(currentPosition);
-                System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                //System.out.println("Opp: "+this.xIDResolver(currentPosition));
                 break;
             } else if (tempPiece.color == this.color){
-                System.out.println("Same: "+this.xIDResolver(currentPosition));
+                //System.out.println("Same: "+this.xIDResolver(currentPosition));
                 break;
             }
 
         }
 
-        System.out.println("\nRight: ");
+        //System.out.println("\nRight: ");
 
         for (Integer i = 0; i < possibleMovesRight.size(); i++) {
             Integer currentPosition = possibleMovesRight.get(i);
@@ -195,19 +195,19 @@ public class Rook extends Piece {
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesRight.add(currentPosition);
-                System.out.println("Nothing: "+this.xIDResolver(currentPosition));
+                //System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesRight.add(currentPosition);
-                System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                //System.out.println("Opp: "+this.xIDResolver(currentPosition));
                 break;
             } else if (tempPiece.color == this.color){
-                System.out.println("Same: "+this.xIDResolver(currentPosition));
+                //System.out.println("Same: "+this.xIDResolver(currentPosition));
                 break;
             }
 
         }
 
-        System.out.println("\nBottom: ");
+        //System.out.println("\nBottom: ");
 
         for (Integer i = 0; i < possibleMovesBottom.size(); i++) {
             Integer currentPosition = possibleMovesBottom.get(i);
@@ -215,13 +215,13 @@ public class Rook extends Piece {
             Piece tempPiece = currentBoard.positionPieceAssoc.get(exID);
             if(tempPiece == null){
                 allowedMovesBottom.add(currentPosition);
-                System.out.println("Nothing: "+this.xIDResolver(currentPosition));
+                //System.out.println("Nothing: "+this.xIDResolver(currentPosition));
             } else if(tempPiece.color != this.color){
                 allowedMovesBottom.add(currentPosition);
-                System.out.println("Opp: "+this.xIDResolver(currentPosition));
+                //System.out.println("Opp: "+this.xIDResolver(currentPosition));
                 break;
             } else if (tempPiece.color == this.color){
-                System.out.println("Same: "+this.xIDResolver(currentPosition));
+                //System.out.println("Same: "+this.xIDResolver(currentPosition));
                 break;
             }
 
@@ -305,12 +305,12 @@ public class Rook extends Piece {
         for (Integer x: allowedMoves) {
             tempPos = xIDResolver(x);
             if(currentBoard.blkKingsEight.containsKey(tempPos)){
-                System.out.println("Calling white rook edits blkKingsEight");
+                //System.out.println("Calling white rook edits blkKingsEight");
                 currentBoard.blkKingsEight.replace(tempPos,false);
             }
 
             if(currentBoard.blkKingsPos.containsKey(tempPos)){
-                System.out.println("Calling white rook edits blkKingsPos");
+                //System.out.println("Calling white rook edits blkKingsPos");
                 currentBoard.blkKingsPos.replace(tempPos,false);
             }
         }
@@ -324,7 +324,7 @@ public class Rook extends Piece {
         for (String pos : currentBoard.blkKingsEight.keySet()) {
             Integer sqpos = positionResolver(pos);
             Integer curPos = positionResolver(currentPos);
-            System.out.println("Calling white rook's moves"+pos);
+            //System.out.println("Calling white rook's moves"+pos);
             possibleMoves(curPos,sqpos);
             allowedMoves(sqpos,currentBoard,blk);
         }
@@ -332,7 +332,7 @@ public class Rook extends Piece {
         for (String pos : currentBoard.blkKingsPos.keySet()) {
             Integer sqpos = positionResolver(pos);
             Integer curPos = positionResolver(currentPos);
-            System.out.println("Calling white rook's moves"+pos);
+            //System.out.println("Calling white rook's moves"+pos);
             possibleMoves(curPos,sqpos);
             allowedMoves(sqpos,currentBoard,blk);
         }
