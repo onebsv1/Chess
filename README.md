@@ -10,6 +10,7 @@ wrong position, wrong piece name etc, mostly because I was bored.
 
 
 Features:
+
 1. Can handle pawn advancement, displays options of all dead pieces for replacement.
 
 2. King check, and conditions to check if the king will be in the
