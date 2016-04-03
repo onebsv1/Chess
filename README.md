@@ -5,7 +5,7 @@ This is a two player chess game. (no AI)
 PLEASE DO NOT ENTER INVALID POSITIONS.
 
 I know that we don't check for invalid inputs, i.e.
-wrong position, wrong piece name etc, mostly because I was bored.
+wrong position, wrong piece name etc.
 
 
 Features:
